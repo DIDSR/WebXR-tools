@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extra &mdash; Pattern Generation Tool  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Entities" href="entities.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Pattern Generation Tool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Package Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">Pattern Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">Entities</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Extra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#json-package-format">JSON Package Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#z-fighting">Z-Fighting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#easy-debugging">Easy Debugging</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Pattern Generation Tool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Extra</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/extra.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="extra">
+<h1>Extra<a class="headerlink" href="#extra" title="Permalink to this headline"></a></h1>
+<div class="section" id="json-package-format">
+<h2>JSON Package Format<a class="headerlink" href="#json-package-format" title="Permalink to this headline"></a></h2>
+<div class="line-block">
+<div class="line">{</div>
+<div class="line">“scenes”: { map of scenes },</div>
+<div class="line">“textures”: {</div>
+<div class="line-block">
+<div class="line">“uploadedTextureFormats”:  { map of image sizes for uploaded textures },</div>
+<div class="line">“textureValues”:  [ list of textures present when package was saved],  }</div>
+</div>
+<div class="line">“date”: “&lt;datetime of save&gt;”</div>
+<div class="line">}</div>
+</div>
+</div>
+<div class="section" id="z-fighting">
+<h2>Z-Fighting<a class="headerlink" href="#z-fighting" title="Permalink to this headline"></a></h2>
+<p>Do not stack entities on the same Z axis. Stacking entities on the same plane will result in <a class="reference external" href="https://en.wikipedia.org/wiki/Z-fighting">z-fighting</a>. Instead, provide a slight offset on the Z-axis when overlapping entities.</p>
+</div>
+<div class="section" id="easy-debugging">
+<h2>Easy Debugging<a class="headerlink" href="#easy-debugging" title="Permalink to this headline"></a></h2>
+<p>If you would like to inspect the HTML or JavaScript data of the selected entity:
+- Open the inspector with Ctrl + Shift + i</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>On headsets, a limited console can be opened with Ctrl+i. This console does not take inputs but will display errors.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Enter “selectedEntity” into the command prompt, this will bring up all associated HTML code</p></li>
+<li><dl class="simple">
+<dt>Enter “selectedEntity.getAttribute(“&lt;desired component&gt;”) to see the associated JavaScript data for the desired component</dt><dd><ul>
+<li><p>Ex: selectedEntity.getAttribute(“position”) to view position or selectedEntity.getAttribute(“material”) to view texture and color</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Enter “selectedEntity.setAttribute(“&lt;desired component&gt;”,&lt;desired value&gt;) to set the associated JavaScript data for the desired component</dt><dd><ul>
+<li><p>Ex: selectedEntity.setAttribute(“position”,{x: 0, y: 0, z: -125}) to set position to 0,0 on the cylindrical plane</p></li>
+<li><p>Ex: selectedEntity.setAttribute(“material”,{color: “#0000FF”, shader: “flat”, src: “”}) to set the color to red and remove the texture</p></li>
+<li><p>Make sure to include shader: “flat” to remove unnecessary lighting effects</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="entities.html" class="btn btn-neutral float-left" title="Entities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
