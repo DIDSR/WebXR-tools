@@ -256,7 +256,7 @@ async function pastebinPost(useTextures){
         console.error('Failed to copy: ', err);
         return false
       }
-   }).catch((error) => alert('Failed to import from: '+url+' with error '+error))
+   }).catch((error) => alert('Failed to post with error '+error))
 }
 
 /* Adds packages to local storage.
