@@ -149,14 +149,14 @@
                     <label for="displayUtility" class="toggle"> </label>                              Edit</div><div id="settingsButtonContainer" style="padding-left: 10%; padding-bottom: 13px; display: inline-block; width: 54.73px; float: right; padding-top:12px; padding-right:14px;"><button id="settingsButton" style="text-align:center; width:100%;" class="button add" onclick="openSettings()" title="Open Settings"><i id="settingsIcon" class="fa-solid fa-gear"></i></button></div></div>
                 <div class="content">
                     <div id="packageLayout" class="display-grid">
-                        <div class="packages" style="border-bottom: 1px solid black; padding-top: 5px;"><b style="padding-right: 10%;">Package List:</b><div style="padding-right: 5%; padding-bottom: 5%; display: inline-block; width: 20%;"><button style="text-align:center; width:100%;" class="button add" onclick="addPackage()"  title="Add Package"><i class="fa-solid fa-plus"></i></button></div><button style="text-align:center; width:20%" class="button reset" onclick="removePackage()"  title="Delete Package"><i class="fa-solid fa-trash"></i></button>
+                        <div class="packages" style="border-bottom: 1px solid black; padding-top: 5px;"><b style="padding-right: 4%;">Packages:</b><button style="text-align:center; width:20%;" class="button add" onclick="saveSelected()"  title="Save Package"><i class="fa-solid fa-download"></i></button><div style="padding-right: 2%; padding-left: 2%; padding-bottom: 5%; display: inline-block; width: 20%;"><button style="text-align:center; width:100%;" class="button add" onclick="addPackage()"  title="Add Package"><i class="fa-solid fa-plus"></i></button></div><button style="text-align:center; width:20%" class="button reset" onclick="removePackage()"  title="Delete Package"><i class="fa-solid fa-trash"></i></button>
                             <p style="position: relative; text-align: center; padding-bottom: 2%; top: 0%;">
                                 <select class="select" name="packageDisplay" id="packageDisplay" onchange="changePackage(this)">
                                     <option value="default">default</option>
                                 </select>
                             </p>
                             <div>
-                                    Upload Package:            <button style="text-align:center; width:20%; float: right;" class="button add" onclick="saveSelected()"  title="Save Package"><i class="fa-solid fa-download"></i></button>
+                                    Upload Package:            
                             </div>
                             <p><input style="width: 100%; padding-top: 10" type="file" id="scene-disp-input" accept=".json" multiple></p>
                             <div> Recent packages: <select class="select" id="recentPackages" onchange="changeUrl(this)">

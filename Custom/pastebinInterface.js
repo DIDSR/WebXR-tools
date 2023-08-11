@@ -46,7 +46,7 @@ var fileContent = await fetch(url).then((res) => {
             //console.log(url)
            return res.json()
         }
-    });
+    }).catch((error) => alert('Failed to import from: '+url+' with error '+error));
 
     if(fileContent == null){
         alert('No package found')
@@ -183,7 +183,7 @@ function compressTextures(textures){
                 }
             })
                 }
-            })
+            }).catch((error) => alert('Failed to import from: '+url+' with error '+error))
 }
 
 /* Posts content to pastebin.
@@ -256,7 +256,7 @@ async function pastebinPost(useTextures){
         console.error('Failed to copy: ', err);
         return false
       }
-   })
+   }).catch((error) => alert('Failed to import from: '+url+' with error '+error))
 }
 
 /* Adds packages to local storage.
