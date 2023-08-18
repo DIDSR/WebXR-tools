@@ -1,5 +1,7 @@
 # Manual User Interface Tests #
 
+Begin by opening this link https://didsr.github.io/WebXR-tools/Custom/
+
 ## Test 1- Adding and editing a package
 This test will examine the package and pattern systems.  
    1. Add a package with the name "Test 1" by pressing the *plus* icon next to **Packages**
