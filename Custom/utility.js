@@ -61,6 +61,7 @@ function removeEntity(){
     }
     if(els.length == 0){
         utility.checked = false;
+        selectedEntity = null;
         toggleAddEdit(true);
         
     } else {
@@ -350,6 +351,7 @@ function revertChanges(){
         bullseyeNum = 0;
         textureNum = 0;
         numAdded = 0;
+        selectedEntity = null;
 }
 
 names = {'default' : {'red':1,'green':1,'blue':1,'white':1,'grille':1,'crosshair':1,'line':1,'circular dot array':1,'dot array':1,'checkerboard (w)':1,'checkerboard (b)':1,'ring_w5':1,'ring_w10':1,'ring_w20':1,'bullseye':1}}
