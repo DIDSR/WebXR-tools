@@ -9,6 +9,7 @@ This test will examine the package and pattern systems.
       - Name the third pattern "Pattern 3"
 
    At this point, the tool should look like this:  
+   ![image](../Images/test1_1.PNG)
 
    3. Reorder the patterns so that "Pattern 3" is the first pattern, "Pattern 2" is the second pattern, and "Pattern 1" is the last pattern
       - Do this by dragging "Pattern 3" and dropping it in the first position
@@ -20,6 +21,7 @@ This test will examine the package and pattern systems.
    8. Paste the copied patterns by pressing Ctrl+v
 
    At this point, the tool should look like this:
+   ![image](../Images/test1_2.PNG)
 
 ## Test 2- Adding and editing a pattern
 This test will examine the pattern and entity systems.  
@@ -34,6 +36,7 @@ This test will examine the pattern and entity systems.
    11. Reorder the patterns so that "Pattern 4" is first, "Pattern 3" is second, "Pattern 2" is third, and "Pattern 1" is last
 
    At this point, the tool should look like this:   
+   ![image](../Images/test1_3.PNG)
 
    12. Select "Pattern 3"
    13. Switch the toggle at the top of the tab to be in *Edit* mode
@@ -66,6 +69,8 @@ This test will examine the pattern and entity systems.
        - Change vertex B to be at (-50, -50)
        - Change vertex C to be at (50, -50)
    At this point the tool should look like this:
+
+   ![image](../Images/test2_1.PNG)
 
    19. Switch the first toggle to *Display* mode
    20. Select "Pattern 2"
@@ -101,7 +106,7 @@ This test will examine the pattern and entity systems.
        - Increase the number of bars to 100
        - Change the secondary color to white by selecting it from the color selector or entering #ffffff
    At this point the tool should look like this:
-![image](https://github.com/DIDSR/WebXR-tools/assets/68344516/d1a07fe4-2a45-4a71-91ad-ea6fdbc1904c)
+![image](../Images/test2_2.PNG)
 
    27. Switch the first toggle to *Display* mode
    28. Select "Pattern 1"
@@ -137,6 +142,7 @@ This test will examine the pattern and entity systems.
        - Increase the number of rings to 6
        - Keep the ring pitch at 5m
 At this point the tool should look like this:
+![image](../Images/test2_3.PNG)
 
 ## Test 3- Saving and uploading a package
 This test will examine the sharing feature of the tool.
