@@ -156,7 +156,7 @@
                                 </select>
                             </p>
                             <div>
-                                    Upload Package:            
+                                    Upload Package:            <button style="text-align:center; width:20%; float: right;" class="button add" onclick="saveSelected()"  title="Save Package"><i class="fa-solid fa-download"></i></button>
                             </div>
                             <p><input style="width: 100%; padding-top: 10" type="file" id="scene-disp-input" accept=".json" multiple></p>
                             <div> Recent packages: <select class="select" id="recentPackages" onchange="changeUrl(this)">
@@ -306,6 +306,7 @@
         </div>
         <div id="directions">
         <button type="button" class="collapsible" id="directionsCollapse" style="width:100%;height:100%;"  title="Click for help" onclick="window.open('https://didsr.github.io/WebXR-tools/Custom/doc/','_blank')"><i class="fa-solid fa-circle-info"></i></button>
+
         </div>
 
         <div id="debug">
