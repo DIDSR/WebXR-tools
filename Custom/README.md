@@ -106,7 +106,7 @@ This test will examine the pattern and entity systems.
        - Increase the number of bars to 100
        - Change the secondary color to white by selecting it from the color selector or entering #ffffff
    At this point the tool should look like this:
-![image](../Images/test2_2.PNG)
+![image](../Images/test2_2.png)
 
    27. Switch the first toggle to *Display* mode
    28. Select "Pattern 1"
