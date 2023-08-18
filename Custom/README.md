@@ -27,7 +27,7 @@ This test will examine the package/pattern system.
        - Under **Pattern Settings** select the *Rename* button
        - Enter "Pattern 4" in the textbox and press OK
    10. Delete the "ring_w2" pattern by pressing the trash icon next to **Pattern List**
-      - Select OK on the confirmation
+       - Select OK on the confirmation
    11. Reorder the patterns so that "Pattern 4" is first, "Pattern 3" is second, "Pattern 2" is third, and "Pattern 1" is last
 
    At this point, the tool should look like this:   
