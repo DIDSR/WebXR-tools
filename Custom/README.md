@@ -4,9 +4,9 @@
 This test will examine the package/pattern system.
    1. Begin by adding a package with the name "Test 1 Package"
    2. Add three patterns to this package
-     - Name the first pattern "Pattern 1"
-     - Name the second pattern "Pattern 2"
-     - Name the third pattern "Pattern 3"
+      - Name the first pattern "Pattern 1"
+      - Name the second pattern "Pattern 2"
+      - Name the third pattern "Pattern 3"
 
 ## Test 2- Adding and editing a pattern
 
