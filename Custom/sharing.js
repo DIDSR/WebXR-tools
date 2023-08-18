@@ -105,7 +105,7 @@ async function validateLink(url){
             console.log(url)
            return res.json()
         }
-    });
+    }).catch((error) => alert('Failed to fetch from: '+url+' with error '+error));
     if(fileContent == null || !fileContent.hasOwnProperty('filename') || !fileContent.hasOwnProperty('date') || !fileContent.hasOwnProperty('scenes') || !fileContent.hasOwnProperty('textures')){
         return false;
     }
