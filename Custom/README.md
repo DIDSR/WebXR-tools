@@ -103,8 +103,58 @@ This test will examine the pattern and entity systems.
    At this point the tool should look like this:
 ![image](https://github.com/DIDSR/WebXR-tools/assets/68344516/d1a07fe4-2a45-4a71-91ad-ea6fdbc1904c)
 
+   27. Switch the first toggle to *Display* mode
+   28. Select "Pattern 1"
+   29. Switch the toggle at the top of the tab to be in *Edit* mode
+   30. Add a dot array, circular dot array, and bullseye to this pattern
+       - Select dot array as the type of entity to add from the dropdown next to **Type of entity:**
+       - Press the *Add to Pattern* button to add it to the pattern
+       - Repeat for circular dot array and bullseye
+       - The entities will spawn at random places on the screen
+   31. Switch the second toggle to *Edit Entity* mode
+   32. Edit the Dot Array
+       - Click on the dot array or select "dotarray0" from the **Entity** dropdown
+       - Move the dot array so that it is in position (-20, -100, 250)
+       - Change the color of the dot array to green by selecting it from the color selector or entering #00ff00
+       - Increase the number of columns to 7
+       - Increase the number of rows to 7
+       - Increase the radius of the dots to 3m
+       - Decrease the spacing of the dots to 5m
+       - Toggle on the center dot being filled
+   33. Edit the Circular Dot Array
+       - Click on the circular dot array or select "circularDotarray0" from the **Entity** dropdown
+       - Move the circular dot array so that it is in position (0, 0, 249)
+       - Change the color of the dot array to white by selecting it from the color selector or entering #ffffff
+       - Increase the number of dots to 15
+       - Increase the number of rings to 6
+       - Keep the radius of the dots at 2m
+       - Keep the spacing of the dots at 10m
+       - Keep the center dot hollow
+   34. Edit the bullseye
+       - Click on the bullseye or select "bullseye0" from the **Entity** dropdown
+       - Move the bullseye so that it is in position (0, 0, 250)
+       - Change the primary color of the bullseye to blue by selecting it from the color selector or entering #0000ff
+       - Increase the number of rings to 6
+       - Keep the ring pitch at 5m
+At this point the tool should look like this:
 
+## Test 3- Saving and uploading a package
+This test will examine the sharing feature of the tool.
 
-## Test 3- Saving a package
+   35. Switch the first toggle to *Display* mode
+   36. Select the save package button next to **Packages:**
+       - Note: if an uploaded texture was used in Test 2, select cancel when prompted to include textures
+       - Uploaded textures cause generated files to be too large for the link generation service
+   37. Make a note of the package id saved in the url after "?id=" ('?id=<package_id>')
+   38. Refresh the page
+   39. Ensure that the package "Test 1" is loaded and the patterns are correct
+   40. Upload the "Test 1 Comparison" package
+       - Open settings by hitting the *gear* icon at the top right of the tab
+       - Press the import button denoted by a cloud with a down arrow
+       - Paste this link into the textbox: https://didsr.github.io/WebXR-tools/Custom/?id=598zgfm3bqw9
+   41. Check that there is now a package called "Test 1 Comparison" with the same patterns as those created in these tests
+   42. To interactively check for correct results, navigate between the two packages and ensure entity values are the same
+   43. Close the tab completely
+   44. Navigate back to the starting page of the tool (https://didsr.github.io/WebXR-tools/Custom/)
+   45. Select "Test 1" and "Test 1 Comparison" from the **Recent Packages** dropdown and ensure that they are correct
 
-## Test 4- Editing a shared package
