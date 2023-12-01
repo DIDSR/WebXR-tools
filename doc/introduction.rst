@@ -37,6 +37,6 @@ Demo
 
  
 
-           <video controls src="_static/demoVid.mp4" width="620" height="620">
+           <video controls src="./_static/demoVid.mp4" width="620" height="620">
 
-           </video>  
+           </video>
