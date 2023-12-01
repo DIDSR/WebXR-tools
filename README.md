@@ -3,9 +3,9 @@ We have developed a regulatory science tool that enables the measurement of head
 
 The Pattern Creation Tool consists of a user interface built using A-Frame, Three.js, and WebXR for the easy creation of image quality test patterns. It is housed on a website that can be accessed on any WebXR-compatible device with internet access. Created test patterns and collections of scenes can be downloaded and shared as JSON files. This feature enables users to easily create and share patterns, allowing the testing of the same scene on multiple devices. All uploaded patterns remain fully editable, allowing users to make necessary changes to patterns that are shared with them. Additionally, test patterns can be saved in groups or scenes to allow for testing multiple different patterns or variations of a pattern.
 
-The tool is available here:[Custom Pattern Creator tool](https://didsr.github.io/WebXR-tools/Custom/)
+The tool is available here: [Custom Pattern Creator tool](https://didsr.github.io/WebXR-tools/Custom/)
 
-Documentation for the tool is available here:[Custom Pattern Creator tool](https://didsr.github.io/WebXR-tools/Custom/doc)
+Documentation for the tool is available here: [Custom Pattern Creator tool](https://didsr.github.io/WebXR-tools/Custom/doc)
 
 
 ## Custom Pattern Creator
