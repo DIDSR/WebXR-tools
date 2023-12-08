@@ -1,7 +1,10 @@
 Introduction
 ================
 
-`Access to Pattern Creation Tool <https://brendanc490.github.io/WebVR-Test-Patterns/Custom/>`_
+`Access to Pattern Creation Tool <https://didsr.github.io/WebXR-tools/Custom/>`_
+-----------------------------------------------------------------------------------------------
+
+`View the source code <https://github.com/DIDSR/WebXR-tools/tree/main/Custom>`_
 -----------------------------------------------------------------------------------------------
 
 Features
@@ -34,6 +37,6 @@ Demo
 
  
 
-           <video controls src="_static/demoVid.webm" width="620" height="620">
+           <video controls src="./_static/demoVid.mp4" width="620" height="620">
 
-           </video>  
+           </video>
