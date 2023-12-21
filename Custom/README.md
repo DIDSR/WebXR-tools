@@ -17,10 +17,10 @@ This test will examine the package and pattern systems.
       - Do this by dragging "Pattern 3" and dropping it in the first position
       - Drag "Pattern 2" and drop it in the second position
    4. Switch packages to the "default" package
-   5. Multi-select the patterns "crosshair" and "ring_w2" by holding ctrl while clicking on the patterns
-   6. Copy these patterns by pressing Ctrl+c
+   5. Multi-select the patterns "crosshair" and "ring_w2" by holding Ctrl while clicking on the patterns
+   6. Copy these patterns by pressing Ctrl+C on windows or Cmd+C on Mac
    7. Switch packages to the "Test 1 Package" package
-   8. Paste the copied patterns by pressing Ctrl+v
+   8. Paste the copied patterns by pressing Ctrl+V or Cmd+V
 
    At this point, the tool should look like this:
    ![image](../Images/test1_2.PNG)
