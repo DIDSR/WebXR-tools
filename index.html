@@ -17,8 +17,11 @@
             <a class="instructions" href="https://github.com/DIDSR/WebXR-tools/tree/main/TCA"
                 title="See instructions">?</a>
         </li>-->
+        function navigateToCustom(){
+            window.location = window.location.href.includes('github') ? window.location.href+"Custom/" : window.location.origin+"/Custom/"
+        }
         <li>
-            <a href="./Custom/"><img src="Images/patternGenerator.PNG">
+            <a href="./Custom/index.html"><img src="Images/patternGenerator.PNG" onclick="">
                 <div class="title">Custom Pattern Creator</div>
                 <div class="description">Tool that allows for creation of patterns on WebXR. Scenes can be
                     saved and shared.
@@ -28,7 +31,7 @@
                 title="See instructions">?</a>
         </li>
         <li>
-            <a href="./Compatibility/"><img src="Images/compatibility_in_action.png">
+            <a href="./Compatibility/.index.html"><img src="Images/compatibility_in_action.png">
                 <div class="title">Compatibility test</div>
                 <div class="description">Tool that allows to test the compatibility of an XR device with WebXR.
                 </div>
