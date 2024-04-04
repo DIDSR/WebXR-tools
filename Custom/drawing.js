@@ -59,11 +59,24 @@ function addEntity(){
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
         el.setAttribute("arraySpacing", {val: 10});
         el.setAttribute("toggleCenterDot", {val: false});
-        console.log('toggleCenterDot')
     } else if ($("#entity :selected").text() == "bullseye"){
         el.setAttribute("id","bullseye"+bullseyeNum++);
         drawBullseye(5,5,"#"+R+G+B,el);
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
+    }   else if ($("#entity :selected").text() == "text"){
+        el.setAttribute("id","text"+textNum++);
+        el.setAttribute("text",{"value": "Default Text", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 12});
+        /*el.setAttribute("value","Default Text")
+        el.setAttribute("color","#FFFFFF")
+        el.setAttribute("height", .25*2000)
+        el.setAttribute("width", .125*2000)*/
+    } else if ($("#entity :selected").text() == "timer"){
+        if(timerNum > 0){
+            alert("A timer already exists")
+            return
+        }
+        el.setAttribute("id","timer"+timerNum++);
+        el.setAttribute("text",{"value": "00:00.00 ", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 9});
     }
     /* Set default universal stats */
 
@@ -74,8 +87,10 @@ function addEntity(){
     let Y = Math.random() * 30 - 15; // random y position
     el.setAttribute("position",{x: -250 * Math.sin((THETAX*Math.PI)/180), y: Y, z: -250 * Math.cos((THETAX*Math.PI)/180)}); // set position to random x, random y, distance = 250
     el.setAttribute("rotation", {x: 0, y: THETAX, z: 0}); // set rotation to be 0
-    el.setAttribute("angle",{x: THETAX, z: -250}); // set angular units to be random x and 250
-    
+    el.setAttribute("angle",{x: THETAX, z: -250}); // set angular units to be random x and 
+    //el.setAttribute("mov",{startPoint: {x: -250 * Math.sin((THETAX*Math.PI)/180), y: Y, z: -250 * Math.cos((THETAX*Math.PI)/180)}, endPoint: {theta: 0, y: 0, r: -250},speed: 10, acceleration: 1, status: 0, type: "None", startRotation: {x: 0, y: THETAX, z: 0}, keyBind: ''})
+    el.setAttribute("movement",{'startPoints': [],'endPoints': [],'initialVelocities':[],'accelerations':[],'types':[],'origin': {x: -250 * Math.sin((THETAX*Math.PI)/180), y: Y, z: -250 * Math.cos((THETAX*Math.PI)/180)}, 'rotationOrigin': {x: 0, y: THETAX, z: 0}, 'status': -1, 'index': 0, 'currentVelocity': 0, 'timeElapsed': 0})
+
     entityCanvas.appendChild(el); /* add entity to scene */
 
     /* adds option to dropdown */
@@ -251,6 +266,7 @@ function drawDotArray(rows,cols,size,spacing,color1,toggle,parent){
 }
 
 function drawCircularDotArray(radius,circles,dots,size,color1,toggle,parent){
+    console.log(parent)
     let c = 1;
     let middleDot = document.createElement("a-entity");
     middleDot.setAttribute("id",parent.id+"-center");
@@ -310,24 +326,41 @@ function updateJSON(){
     const jsonData = {};
     jsonData["sky"] = {skyColor: sky.getAttribute("material").color};
     els.forEach(element => { 
+        mov = JSON.parse(JSON.stringify(element.components.movement.attrValue))
+        mov.status = -1;
+        console.log(mov)
         if(element.id.includes("gradient") || element.id.includes("grille")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numBars: element.children.length, color2: element.components.color2.attrValue, childGeometry: element.children[0].components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numBars: element.children.length, color2: element.components.color2.attrValue, childGeometry: element.children[0].components.geometry.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("checkerboard")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, tileSize: element.children[0].children[0].components.geometry.attrValue.width,  color2: element.components.color2.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, rows: element.children.length, cols: element.children[0].children.length, tileSize: element.children[0].children[0].components.geometry.attrValue.width,  color2: element.components.color2.attrValue, position: {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("plane")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            let mat = JSON.parse(JSON.stringify(element.components.material.attrValue));
+            for(let i = 0; i < texture.options.length; i++){
+                if("#"+texture.options[i].value == mat.src){
+                    mat.src = texture.options[i].text;
+                    break;
+                }
+            }
+            console.log(mat)
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: mat, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("circle")){
-            jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, fill: element.components.fill.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, fill: element.components.fill.attrValue, position: {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("triangle")){
-            jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, position: {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("circularDotarray")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.toggleCenterDot.attrValue, circles: element.children.length-1, dots: element.children[1].children.length, arraySpacing: element.components.arraySpacing.attrValue, circleSize: element.children[0].components.geometry.attrValue.radiusOuter, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.toggleCenterDot.attrValue, circles: element.children.length-1, dots: element.children[1].children.length, arraySpacing: element.components.arraySpacing.attrValue, circleSize: element.children[0].components.geometry.attrValue.radiusOuter, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("dotarray")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.toggleCenterDot.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: element.components.arraySpacing.attrValue, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, toggleCenterDot: element.components.toggleCenterDot.attrValue, rows: element.children.length, cols: element.children[0].children.length, circleSize: element.children[0].children[0].components.geometry.attrValue.radiusOuter, spacing: element.components.arraySpacing.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("bullseye")){
-            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numRings: element.children.length-1, ringPitch: element.children[0].components.geometry.attrValue.radiusOuter*2, position: element.components.position.attrValue, material: element.components.material.attrValue, rotation: element.components.rotation.attrValue};
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numRings: element.children.length-1, ringPitch: element.children[0].components.geometry.attrValue.radiusOuter*2, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
+        } else if(element.id.includes("text")){
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, text: element.components.text.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
+        }  else if(element.id.includes("timer")){
+            text = JSON.parse(JSON.stringify(element.components.text.attrValue))
+            text.value = "00:00.000"
+            jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, text: element.components.text.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         }});
-        scenes[packageSelect.value][patternList.children[parseFloat(patternList.getAttribute('selectedIndex'))].textContent] = jsonData
+        scenes[packageSelect.value][patternList.children[parseFloat(patternList.getAttribute('selectedIndex'))].id] = jsonData
 }
 
 /* converts hex to RGB values */

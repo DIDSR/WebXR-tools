@@ -31,6 +31,76 @@ $("#z").change(function() {
     editEntity();
   });
 
+/* If the textbox for endX value is changed */
+$("#startX").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endY value is changed */
+$("#startY").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endZ value is changed */
+$("#startZ").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endX value is changed */
+$("#endX").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endY value is changed */
+$("#endY").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endZ value is changed */
+$("#endZ").change(function() {
+    editEntity();
+  });
+
+  /* If the textbox for endX value is changed */
+$("#speedIn").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endY value is changed */
+$("#accelerationIn").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endZ value is changed */
+/*$("#key").change(function(e) {
+    if(keyBind.value.length > 1 || keyBind.value == 'm'){
+        alert('Invalid key, please choose a key other than \'m\' or leave this blank.')
+        return
+    }
+    i = 0;
+    while(i < entityCanvas.children.length){
+        if(entityCanvas.children[i] == selectedEntity){
+            break;
+        }
+        i++;
+    }
+    
+    if(movementKeyBinds[keyBind.value] == null){
+        movementKeyBinds[keyBind.value] = []
+    }
+    movementKeyBinds[keyBind.value].push(i);
+    mov = selectedEntity.getAttribute('mov')
+    if(mov.keyBind != ''){
+        movementKeyBinds[mov.keyBind].splice(movementKeyBinds[mov.keyBind].indexOf(i), 1);
+    }
+    mov.keyBind = keyBind.value
+  });*/
+
+/* If the textbox for endZ value is changed */
+$("#movementTypeIn").change(function() {
+    editEntity();
+  });
+
 /* If the textbox for color value is changed */
 $('#color').minicolors({
     control: 'hue',
@@ -52,7 +122,7 @@ $('#color2').minicolors({
     },
 });
 
-/* If the textbox for x value is changed */
+/* If the textbox for texture value is changed */
 $("#texture").change(function() {
     if(texture.value == "none"){
         selectedEntity.setAttribute("material",{color: selectedEntity.getAttribute("material").color, shader: "flat", src: ""});
@@ -81,7 +151,10 @@ $("#texture").change(function() {
         height.value = selectedEntity.getAttribute("geometry").height;
         fill.value = selectedEntity.getAttribute("fill").val;
         fillIn.style.display = "none";
+        updateJSON();
     }
+    
+
   });
   
 
@@ -308,6 +381,10 @@ $("#toggleCenterDotIn").change(function() {
 });
 
 $("#ringPitchIn").change(function() {
+    editEntity();
+});
+
+$("#text").change(function() {
     editEntity();
 });
 
@@ -567,7 +644,7 @@ function slowLoop(items, loopBody) {
     
 });
 
-keysPressed = {ctrl: false, x: false, c: false, v: false, i: false}
+keysPressed = {ctrl: false, x: false, c: false, v: false, i: false, m: false, r: false}
 
 /* listens for key presses to change pattern */
 document.addEventListener('keyup', (e) => {
@@ -605,6 +682,10 @@ document.addEventListener('keyup', (e) => {
         keysPressed["v"] = false;
     } else if(e.code === "KeyI"){
         keysPressed["i"] = false;
+    } else if(e.code === "KeyM"){
+        keysPressed["m"] = false;
+    }  else if(e.code === "KeyR"){
+        keysPressed["r"] = false;
     }
   });
 
@@ -649,5 +730,61 @@ document.addEventListener('keydown', (e) => {
             // paste
             document.querySelector("#debug").style.display == 'block' ? document.querySelector("#debug").style.display = 'none' : document.querySelector("#debug").style.display = 'block'
         }
+    } else if(e.code === "KeyM"){
+        keysPressed['m'] = true;
+        let i = 0;
+        while(i < entityCanvas.children.length){
+            mov = entityCanvas.children[i].getAttribute('mov')
+            if(mov.status != 0){
+                break;
+            }
+            i++;
+        }
+        if(i != entityCanvas.children.length){
+            stopAllMovement()
+        } else {
+            let i = 0;
+            sum = 0;
+            while(i < entityCanvas.children.length){
+                if((entityCanvas.children[i].getAttribute('position').x == entityCanvas.children[i].getAttribute('mov').startPoint.x && entityCanvas.children[i].getAttribute('position').y == entityCanvas.children[i].getAttribute('mov').startPoint.y && entityCanvas.children[i].getAttribute('position').z == entityCanvas.children[i].getAttribute('mov').startPoint.z) && (entityCanvas.children[i].getAttribute('rotation').x == entityCanvas.children[i].getAttribute('mov').startRotation.x && entityCanvas.children[i].getAttribute('rotation').y == entityCanvas.children[i].getAttribute('mov').startRotation.y && entityCanvas.children[i].getAttribute('rotation').z == entityCanvas.children[i].getAttribute('mov').startRotation.z)){
+                    sum++;
+                }
+                i++;
+            }
+            if(sum != i){
+                let i = 0;
+                while(i < entityCanvas.children.length){
+                    mov = entityCanvas.children[i].getAttribute('mov')
+                    entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                    entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                    i++;
+                }
+            } else {
+                startAllMovement()
+            }
+        }
+    } else if(movementKeyBinds[e.key]) {
+        if(document.activeElement == keyBind){
+            return
+        }
+        for(const i of movementKeyBinds[e.key]){
+            console.log('i')
+            if(entityCanvas.children[i].getAttribute('mov').status != 0){
+                stopMovement(entityCanvas.children[i])
+            } else {
+                if((entityCanvas.children[i].getAttribute('position').x == entityCanvas.children[i].getAttribute('mov').startPoint.x && entityCanvas.children[i].getAttribute('position').y == entityCanvas.children[i].getAttribute('mov').startPoint.y && entityCanvas.children[i].getAttribute('position').z == entityCanvas.children[i].getAttribute('mov').startPoint.z) && (entityCanvas.children[i].getAttribute('rotation').x == entityCanvas.children[i].getAttribute('mov').startRotation.x && entityCanvas.children[i].getAttribute('rotation').y == entityCanvas.children[i].getAttribute('mov').startRotation.y && entityCanvas.children[i].getAttribute('rotation').z == entityCanvas.children[i].getAttribute('mov').startRotation.z)){
+                    toggleMovement(i)
+                } else {
+                    mov = entityCanvas.children[i].getAttribute('mov')
+                    entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                    entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                }
+                
+            }
+        }
     }
+
+
+
   });  
+  

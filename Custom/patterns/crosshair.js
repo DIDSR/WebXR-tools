@@ -1,10 +1,10 @@
-{
+var crosshair = {
 	"scenes": {
-		"circularDotArray": {
+		"crosshair": {
 			"sky": {
 				"skyColor": "#000000"
 			},
-			"circularDotarray0": {
+			"plane0": {
 				"advanced": {
 					"val": false
 				},
@@ -12,13 +12,16 @@
 					"x": 0,
 					"z": -250
 				},
-				"toggleCenterDot": {"val": false},
-				"circles": 10,
-				"dots": 20,
-				"arraySpacing": {
-					"val": 15
+				"widthReal": 1,
+				"fill": {
+					"val": 1,
+					"isFull": true
 				},
-				"circleSize": 1.5,
+				"geometry": {
+					"primitive": "plane",
+					"width": 0,
+					"height": 15
+				},
 				"position": {
 					"x": 0,
 					"y": 0,
@@ -26,7 +29,8 @@
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff"
+					"color": "#ffffff",
+					"src": ""
 				},
 				"rotation": {
 					"x": 0,
@@ -41,6 +45,53 @@
 					"types":[],
 					"origin":{"x":0,"y":0,"z":-250},
 					"rotationOrigin":{"x":0,"y":0,"z":0},
+					"status":-1,
+					"index":0,
+					"currentVelocity":0,
+					"timeElapsed":0
+				}
+			},
+			"plane1": {
+				"advanced": {
+					"val": false
+				},
+				"angle": {
+					"x": 0,
+					"z": -250
+				},
+				"widthReal": 1,
+				"fill": {
+					"val": 1,
+					"isFull": true
+				},
+				"geometry": {
+					"primitive": "plane",
+					"width": 0,
+					"height": 15
+				},
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": -250
+				},
+				"material": {
+					"shader": "flat",
+					"color": "#ffffff",
+					"src": ""
+				},
+				"rotation": {
+					"x": 0,
+					"y": 0,
+					"z": 90
+				},
+				"movement":{
+					"startPoints":[],
+					"endPoints":[],
+					"initialVelocities":[],
+					"accelerations":[],
+					"types":[],
+					"origin":{"x":0,"y":0,"z":-250},
+					"rotationOrigin":{"x":0,"y":0,"z":90},
 					"status":-1,
 					"index":0,
 					"currentVelocity":0,

@@ -127,6 +127,7 @@ function entityLoader(fileContent,name,def,isSingle){
 /* adds entities from json to current scene */
 function addEntitiesFromScene(scene){
     // go through each key in the scene
+    console.log(scenes)
     Object.keys(scene).forEach(key => {
         // handle adding entity similar to drawing entity
         if(key.includes("sky")){
@@ -184,16 +185,39 @@ function addEntitiesFromScene(scene){
             }  else if (key.includes("bullseye")){
                 el.setAttribute("id", "bullseye"+bullseyeNum++);
                 drawBullseye(scene[key].ringPitch,scene[key].numRings,scene[key].material.color,el);
+            } else if (key.includes("text")){
+                el.setAttribute("id", "text"+textNum++);
+                el.setAttribute("text",scene[key].text)
+            } else if (key.includes("timer")){
+                el.setAttribute("id", "timer"+timerNum++);
+                console.log(timerNum)
+                el.setAttribute("text",scene[key].text)
             }
             /* sets stats */
             el.setAttribute("angle", scene[key].angle);
             el.setAttribute("advanced", scene[key].advanced);
             el.setAttribute("position", {x: scene[key].position.x, y: scene[key].position.y, z: scene[key].position.z});
-            el.setAttribute("material", scene[key].material);
+            let mat = null;
+            if(scene[key].material){
+                mat = JSON.parse(JSON.stringify(scene[key].material))
+
+                for(let i = 0; i < texture.options.length; i++){
+                    if(texture.options[i].text == mat.src){
+                        mat.src = "#"+texture.options[i].value;
+                        break;
+                    }
+                }
+            }
+            
+            
+            console.log(mat)
+            el.setAttribute("material", mat);
             el.setAttribute("rotation", scene[key].rotation);
+            el.setAttribute("movement",JSON.parse(JSON.stringify(scene[key].movement)))
             el.setAttribute("click-checker","");
             numAdded++;
             entityCanvas.appendChild(el); /* adds entity to scene */
+
 
             /* adds option to dropdown */
             var option = document.createElement("option");

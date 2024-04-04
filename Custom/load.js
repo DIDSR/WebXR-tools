@@ -1,36 +1,25 @@
 /* Loads in prebuilt scenes and adds them to scenes json */
 
-import red from './patterns/red.JSON' assert { type: "json" };
 scenes['default']['red'] = red['scenes']['default']
 
-import green from './patterns/green.JSON' assert { type: "json" };
 scenes['default']['green'] = green['scenes']['default']
 
-import blue from './patterns/blue.JSON' assert { type: "json" };
 scenes['default']['blue'] = blue['scenes']['default']
 
-import white from './patterns/white.JSON' assert { type: "json" };
 scenes['default']['white'] = white['scenes']['default']
 
-import grille from './patterns/grille.JSON' assert { type: "json" };
 scenes['default']['grille'] = grille['scenes']['default']
 
-import line from './patterns/line.JSON' assert { type: "json" };
 scenes['default']['line'] = line['scenes']['line']
 
-import checkerboard_w from './patterns/checkerboard_w.JSON' assert { type: "json" };
 scenes['default']['checkerboard_w'] = checkerboard_w['scenes']['checkerboard_w']
 
-import checkerboard_b from './patterns/checkerboard_b.JSON' assert { type: "json" };
 scenes['default']['checkerboard_b'] = checkerboard_b['scenes']['checkerboard_b']
 
-import dot_array from './patterns/dot array.JSON' assert { type: "json" };
 scenes['default']['dot array'] = dot_array['scenes']['dot array']
 
-import circular_dot_array from './patterns/circularDotArray.JSON' assert { type: "json" };
 scenes['default']['circular dot array'] = circular_dot_array['scenes']['circularDotArray']
 
-import crosshair from './patterns/crosshair.JSON' assert { type: "json" };
 scenes['default']['crosshair'] = crosshair['scenes']['crosshair']
 
 /*import bullseye from './patterns/bullseye.JSON' assert { type: "json" };
@@ -41,15 +30,16 @@ scenes['default']['ring_w5'] = ring_package['scenes']['ring_w5']
 scenes['default']['ring_w10'] = ring_package['scenes']['ring_w10']
 scenes['default']['ring_w20'] = ring_package['scenes']['ring_w20']*/
 
-import ring_w1 from './patterns/ring_w1.JSON' assert { type: "json" };
 scenes['default']['ring_w1'] = ring_w1['scenes']['ring_w1']
 
-import ring_w2 from './patterns/ring_w2.JSON' assert { type: "json" };
 scenes['default']['ring_w2'] = ring_w2['scenes']['ring_w2']
 
-import ring_w5 from './patterns/ring_w5.JSON' assert { type: "json" };
 scenes['default']['ring_w5'] = ring_w5['scenes']['ring_w5']
 
+scenes['default']['Flying Spot'] = flying_spot['scenes']['Flying Spot']
+
+console.log('Scenes')
+console.log(scenes)
 /*let arr = Object.keys(scenes)
     let len = arr.length
     let i = 0;
