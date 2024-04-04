@@ -1,10 +1,10 @@
-{
+var grille = {
 	"scenes": {
-		"circularDotArray": {
+		"default": {
 			"sky": {
 				"skyColor": "#000000"
 			},
-			"circularDotarray0": {
+			"grille0": {
 				"advanced": {
 					"val": false
 				},
@@ -12,13 +12,15 @@
 					"x": 0,
 					"z": -250
 				},
-				"toggleCenterDot": {"val": false},
-				"circles": 10,
-				"dots": 20,
-				"arraySpacing": {
-					"val": 15
+				"numBars": 100,
+				"childGeometry": {
+					"primitive": "plane",
+					"width": 10,
+					"height": 450
 				},
-				"circleSize": 1.5,
+				"color2": {
+					"val": "#000000"
+				},
 				"position": {
 					"x": 0,
 					"y": 0,

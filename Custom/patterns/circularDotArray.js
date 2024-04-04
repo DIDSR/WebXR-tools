@@ -1,4 +1,4 @@
-{
+var circular_dot_array = {
 	"scenes": {
 		"circularDotArray": {
 			"sky": {

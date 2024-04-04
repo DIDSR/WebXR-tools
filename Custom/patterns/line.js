@@ -1,10 +1,10 @@
-{
+var line = {
 	"scenes": {
-		"circularDotArray": {
+		"line": {
 			"sky": {
 				"skyColor": "#000000"
 			},
-			"circularDotarray0": {
+			"plane0": {
 				"advanced": {
 					"val": false
 				},
@@ -12,13 +12,16 @@
 					"x": 0,
 					"z": -250
 				},
-				"toggleCenterDot": {"val": false},
-				"circles": 10,
-				"dots": 20,
-				"arraySpacing": {
-					"val": 15
+				"widthReal": 1,
+				"fill": {
+					"val": 1,
+					"isFull": true
 				},
-				"circleSize": 1.5,
+				"geometry": {
+					"primitive": "plane",
+					"width": 0,
+					"height": 1000
+				},
 				"position": {
 					"x": 0,
 					"y": 0,
@@ -26,7 +29,8 @@
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff"
+					"color": "#ffffff",
+					"src": ""
 				},
 				"rotation": {
 					"x": 0,

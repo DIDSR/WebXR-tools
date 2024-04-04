@@ -43,12 +43,12 @@ async function handleImport(){
                     return res;
                 })
                 if(res2){
-                    if(url.includes('pastebin')){
+                    if(url.includes('https://didsr.pythonanywhere.com/webxrtools/get?id=')){
                         if(!window.location.href.includes('?')){
-                            let newURL = window.location.href + "?id=" +url.split("https://pastebin.run/")[1].split(".txt")[0]
+                            let newURL = window.location.href + "?id=" +url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]
                             window.history.pushState('object', document.title, newURL);
                         } else {
-                            let newURL = window.location.href + "," +url.split("https://pastebin.run/")[1].split(".txt")[0]
+                            let newURL = window.location.href + "," +url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]
                             window.history.pushState('object', document.title, newURL);
                         }
                     } else {
@@ -83,7 +83,7 @@ async function localLinkImport(url){
     let i = 0;
     while(i < ids.length){
         console.log(ids[i])
-        var res = pastebinFetch("https://pastebin.run/"+ids[i]+".txt").then((result) => {
+        var res = pastebinFetch("https://didsr.pythonanywhere.com/webxrtools/get?id="+ids[i]).then((result) => {
             return result
         });
         if(!res){
@@ -112,4 +112,20 @@ async function validateLink(url){
     return true;
 
 }
+
+
+
+    // go through each property
+        // if property is not filename, date, scenes, or textures JSON has been tampered with
+
+        
+
+        
+
+        // if scenes
+            
+
+        // if textures
+            // check that texture urls do not lead to dangerous place and image does not contain malicious code
+
 

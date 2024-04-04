@@ -1,10 +1,10 @@
-{
+var ring_w5 = {
 	"scenes": {
-		"circularDotArray": {
+		"ring_w5": {
 			"sky": {
 				"skyColor": "#000000"
 			},
-			"circularDotarray0": {
+			"bullseye0": {
 				"advanced": {
 					"val": false
 				},
@@ -12,13 +12,8 @@
 					"x": 0,
 					"z": -250
 				},
-				"toggleCenterDot": {"val": false},
-				"circles": 10,
-				"dots": 20,
-				"arraySpacing": {
-					"val": 15
-				},
-				"circleSize": 1.5,
+				"numRings": 30,
+				"ringPitch": 5,
 				"position": {
 					"x": 0,
 					"y": 0,

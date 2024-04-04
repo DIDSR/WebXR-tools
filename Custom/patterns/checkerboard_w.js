@@ -1,10 +1,10 @@
-{
+var checkerboard_w = {
 	"scenes": {
-		"circularDotArray": {
+		"checkerboard_w": {
 			"sky": {
 				"skyColor": "#000000"
 			},
-			"circularDotarray0": {
+			"checkerboard0": {
 				"advanced": {
 					"val": false
 				},
@@ -12,13 +12,12 @@
 					"x": 0,
 					"z": -250
 				},
-				"toggleCenterDot": {"val": false},
-				"circles": 10,
-				"dots": 20,
-				"arraySpacing": {
-					"val": 15
+				"rows": 17,
+				"cols": 17,
+				"tileSize": 10,
+				"color2": {
+					"val": "#000000"
 				},
-				"circleSize": 1.5,
 				"position": {
 					"x": 0,
 					"y": 0,

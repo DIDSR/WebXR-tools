@@ -1,10 +1,10 @@
-{
+var dot_array = {
 	"scenes": {
-		"circularDotArray": {
+		"dot array": {
 			"sky": {
 				"skyColor": "#000000"
 			},
-			"circularDotarray0": {
+			"dotarray0": {
 				"advanced": {
 					"val": false
 				},
@@ -13,12 +13,12 @@
 					"z": -250
 				},
 				"toggleCenterDot": {"val": false},
-				"circles": 10,
-				"dots": 20,
-				"arraySpacing": {
-					"val": 15
+				"rows": 21,
+				"cols": 21,
+				"circleSize": 2,
+				"spacing": {
+					"val": 3
 				},
-				"circleSize": 1.5,
 				"position": {
 					"x": 0,
 					"y": 0,
