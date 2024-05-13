@@ -29,6 +29,8 @@
     // save date
     code['date'] = new Date().toLocaleString();
 
+    code['version'] = 1.0
+
     // check size of package to ensure it can be posted
     const size = new TextEncoder().encode(JSON.stringify(code)).length;
 

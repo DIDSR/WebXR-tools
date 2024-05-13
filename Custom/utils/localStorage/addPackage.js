@@ -28,7 +28,7 @@
     // compress the package content
     value = LZString.compressToBase64(JSON.stringify(value))
 
-    let arr = [value,textures]
+    let arr = [value,textures,version]
 
     // get the contents of localStorage
     let localScenes = JSON.parse(localStorage.getItem('packages'))
@@ -139,8 +139,15 @@ async function changeUrl(){
     // get contents of local storage
     let localArr = JSON.parse(localStorage.getItem('packages'))
 
+    
+
     // get the desired package from localStorage
     let key = Object.keys(localArr[recentPackages.selectedIndex])[0]
+    
+    if(localArr[recentPackages.selectedIndex][key][2] < version){
+        alert('Package is out of date. You will need to remake it.')
+        return;
+    }
 
     // prompt user for a name for the package and validate the input
     let packageName = prompt("Enter a name for this package: ", key)

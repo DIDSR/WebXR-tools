@@ -267,3 +267,5 @@ const packages = {default: ''} // dictionary of packages and their respective li
 const names = {default: {}} // list of packages and the names and count of names of each pattern within
 
 var colorChange = true;
+
+const version = 1.0;

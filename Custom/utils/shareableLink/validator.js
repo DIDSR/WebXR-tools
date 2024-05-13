@@ -18,7 +18,14 @@ function validateJSON(file){
                 alert('error: invalid file date')
                 return false;
             }
-        } else if(currProperty == 'scenes'){
+        } else if(currProperty == 'version'){
+            // if date
+            if(typeof file[currProperty] != 'number'){
+                    // check for valid date
+                alert('error: invalid version')
+                return false;
+            }
+        }else if(currProperty == 'scenes'){
             continue;
                         // check if entity contents are valid for given type
 
