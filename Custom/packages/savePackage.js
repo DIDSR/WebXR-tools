@@ -53,6 +53,9 @@ function saveSelected(){
 
     // add date
     data['date'] = new Date().toLocaleString();
+
+    data['version'] = version;
+
     download(data,packageSelect.value+".JSON","text/plain;charset=utf-8");
     pastebinPost(useTextures)
 }

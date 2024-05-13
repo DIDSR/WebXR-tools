@@ -134,6 +134,12 @@ async function pastebinFetch(url,onload){
         return false;
     }
     
+    let currVer = fileContent['version'] ? fileContent['version'] : 1.0
+    if(currVer < version){
+        alert('Package is out of date. You will need to remake it.')
+        return false;
+    }
+    
     // Begin name validation
 
     const re = /^[a-zA-Z0-9-_ ]+$/ // checks that names contain only alphanumerics, dash, underscore, or spaces

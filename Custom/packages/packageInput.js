@@ -15,6 +15,11 @@ scene_display_input.addEventListener("change", function() {
             const reader = new FileReader();
 
             reader.onload = function() {
+                let currVer = fileContent['version'] ? fileContent['version'] : 1.0
+                if(currVer < version){
+                    alert('Package is out of date. You will need to remake it.')
+                    return;
+                }
                 fileContent = JSON.parse(reader.result);
                 if(!validateJSON(fileContent)){
                     alert('Invalid package');
