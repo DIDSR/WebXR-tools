@@ -39,7 +39,6 @@ function saveSelected(){
         data['textures']['textureValues'] = textures
         data['textures']['uploadedTextureFormats'] = uploadedTextureFormat
     } else {
-        console.log('made it')
         for (const pattern of Object.keys(scenes[packageSelect.value])){
             for (const ent of Object.keys(scenes[packageSelect.value][pattern])){
                 if(ent.includes('plane')){

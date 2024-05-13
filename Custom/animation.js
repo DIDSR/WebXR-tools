@@ -9,38 +9,6 @@ function handleAnimationToggle(){
 
 }
 
-/*function handleAll(){
-    // if no entities then do nothing
-    if(els.length <= 0){
-        return
-    }
-    // loop through each
-    let status = 0;
-    if(handleAllButton.children[0].className.includes('fa-play')){
-        handleAllButton.children[0].className = "fa-solid fa-pause";
-        status = 1;
-        if(timerNum > 0){
-            startTimer()
-        }
-    } else {
-        handleAllButton.children[0].className = "fa-solid fa-play";
-        // timer pause
-        if(timerNum > 0){
-            clearInterval(time)
-        }
-    }
-    let i = 0;
-    while(i < els.length){
-        let data = els[i].getAttribute('movement');
-        if(data.startPoints.length > 0){
-            data.status = status;
-            els[i].setAttribute('movement',data)
-        }
-
-        i++;
-    }
-
-}*/
 
 function startAll(){
     let status = 1;
@@ -140,6 +108,5 @@ function stopIndividual(e){
     data.status = -1
     selectedEntity.setAttribute('movement',data)
     movementIcon.className = "fa-solid fa-play"
-
 
 }

@@ -93,6 +93,10 @@ const widthIn = document.getElementById("widthIn"); /* width input */
 const height = document.getElementById("height"); /* height container paragraph */
 const heightIn = document.getElementById("heightIn"); /* height input */
 
+/* Height related */
+const size = document.getElementById("size"); /* height container paragraph */
+const sizeIn = document.getElementById("sizeIn"); /* height input */
+
 /* Triangle only attributes */
 /* Vertex A related */
 
@@ -222,6 +226,9 @@ const settingsLayout = document.getElementById('settingsLayout')
 const startAllButton = document.getElementById('startAllButton')
 const pauseAllButton = document.getElementById('pauseAllButton')
 const stopAllButton = document.getElementById('stopAllButton')
+
+const consoleButton = document.getElementById('consoleButton')
+const debug = document.getElementById('debug')
 
 
 /* Local Variables */

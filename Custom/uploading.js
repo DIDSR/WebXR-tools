@@ -127,7 +127,6 @@ function entityLoader(fileContent,name,def,isSingle){
 /* adds entities from json to current scene */
 function addEntitiesFromScene(scene){
     // go through each key in the scene
-    console.log(scenes)
     Object.keys(scene).forEach(key => {
         // handle adding entity similar to drawing entity
         if(key.includes("sky")){
@@ -190,7 +189,6 @@ function addEntitiesFromScene(scene){
                 el.setAttribute("text",scene[key].text)
             } else if (key.includes("timer")){
                 el.setAttribute("id", "timer"+timerNum++);
-                console.log(timerNum)
                 el.setAttribute("text",scene[key].text)
             }
             /* sets stats */
@@ -210,7 +208,6 @@ function addEntitiesFromScene(scene){
             }
             
             
-            console.log(mat)
             el.setAttribute("material", mat);
             el.setAttribute("rotation", scene[key].rotation);
             el.setAttribute("movement",JSON.parse(JSON.stringify(scene[key].movement)))

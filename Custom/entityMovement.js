@@ -65,7 +65,6 @@ function toggleMovement(entPos){
         d = Math.sqrt((arcLen)*(arcLen) + (yDelta)*(yDelta))
         steps = d/ent.getAttribute('mov').speed*60
     }
-    console.log(d)
     var prev = p1;
     var num = 1;
     var time = 1;
@@ -199,7 +198,6 @@ function stopMovement(el){
         d = Math.sqrt((arcLen)*(arcLen) + (yDelta)*(yDelta))
         steps = d/movementArr[i][2]*60
     }
-    console.log(d)
     var prev = p1;
     var num = 1;
     var time = 1;
@@ -208,7 +206,6 @@ function stopMovement(el){
     var initialVelocity = movementArr[i][2]
     var entAcceleration = movementArr[i][3]
     var tmp = setInterval((entPos,p1,endPoint, movementArr, i) => {
-        console.log(movementArr)
         let ent = entityCanvas.children[entPos]
         distanceCovered = (initialVelocity)*(num*(.017)) + 0.5*entAcceleration*((num*(.017))*(num*(.017)))
         amtCovered = (distanceCovered/d)

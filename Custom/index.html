@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../lib/fontawesome-free-6.4.0-web/css/all.css"></script>
         <link rel="stylesheet" href="../lib/jquery.minicolors.css">
         <script src="../lib/jquery.minicolors.min.js" type="text/javascript"> </script>
-        <script src="./ControllerComponents.js" type="text/javascript"></script>
+        <!--<script src="./ControllerComponents.js" type="text/javascript"></script>-->
         <script>
         /* Code to register the orthographic camera as parent camera and remove original camera */
         AFRAME.registerComponent('ortho', {
@@ -116,20 +116,9 @@
                 val: {type: 'boolean', default: false}
             },
         });
-        AFRAME.registerComponent('mov', {
-            schema: {
-                startPoint: {type: 'vec3', default: {x: 0, y: 0, z: 0}},
-                endPoint: {type: 'vec3', default: {x: 0, y: 0, z: 0}},
-                speed: {type: 'float', default: 10},
-                acceleration: {type: 'float', default: 1},
-                status: {type: 'float', default: 0},
-                type: {type: 'string', default: "Rubberband"},
-                startRotation: {type: 'vec3', default: {x: 0, y: 0, z: 0}},
-                keyBind: {type: 'string', default: ''}
-            },
-        });
         </script>
-        <script src="./movementComponent.js" type="text/javascript"></script>
+        <script src="animations/movementComponent.js" type="text/javascript"></script>
+        <script src="input/controllerComponent.js" type="text/javascript"></script>
     </head>
 
     <body>
@@ -145,8 +134,8 @@
                 <img id="BR" src="textures/TG18-BR.2k_12b.png">
                 <img id="transparent" src="textures/transparent.jpg">
             </a-assets>
-            <a-entity id="con-left" laser-controls="hand: left" model="true" button-listener-l thumbstick-left trackpad-left position-updates-left></a-entity>
-            <a-entity id="con-right" laser-controls="hand: right" model="true" button-listener-r thumbstick-right trackpad-right position-updates-right></a-entity>
+            <a-entity id="con-left" laser-controls="hand: left; model: false" button-listener-l thumbstick-left trackpad-left position-updates-left></a-entity>
+            <a-entity id="con-right" laser-controls="hand: right; model: false" button-listener-r thumbstick-right trackpad-right position-updates-right></a-entity>
             <a-camera>
                 <a-sky id="sky" color="#000000" radius="1000"></a-sky>
                 <a-entity id="entityCanvas" visible="true"></a-entity>
@@ -227,6 +216,7 @@
                                     <div id="numDots" style="justify-content: space-between;">Number of dots: <input type="number" class="input" id="numDotsIn" value="16"></div>
                                     <div id="numRings" style="justify-content: space-between;">Number of rings: <input type="number" class="input" id="numRingsIn" value=".1"></div>
                                     <div id="vertices">Vertices (x: m, y: m)</div>
+                                    <div id="sizeIn" style="justify-content: space-between;">Size (m): <input type="number" class="input" id="size" value="65"></div>
                                 </div>
                                 <div id="area2" class="area2">
                                     <div id="widthIn" style="justify-content: space-between;">Width (m): <input type="number" class="input" id="width" value=".125"></div>
@@ -234,6 +224,7 @@
                                     <div id="numCircles" style="justify-content: space-between;">Number of rings: <input type="number" class="input" id="numCirclesIn" value=".1"></div>
                                     <div id="ringPitch" style="justify-content: space-between;">Ring Pitch: <input type="number" class="input" id="ringPitchIn" value=".1"></div>
                                     <div id="va" style="justify-content: space-between;">Vertex A: <input type="number" class="input" id="vax" value="0"> <input type="number" class="input" id="vay" value="0.1875"></div>
+                                    <div id="textIn" style="justify-content: space-between;">Text Content: <textarea class="input" id="text" style="width: 100%;" value="Default Text"></textarea></div>
                                 </div>
                                 <div id="area3" class="area3">
                                     <div id="fillIn" style="justify-content: space-between;">Border Size (m): <input type="number" class="input" id="fill" value=".25"></div>
@@ -241,7 +232,6 @@
                                     <div id="tileSize" style="justify-content: space-between;">Tile size: <input type="number" class="input" id="tileSizeIn" value=".1"></div>
                                     <div id="circleSize" style="justify-content: space-between;">Radius of dots: <input type="number" class="input" id="circleSizeIn" value=".1"></div>
                                     <div id="vb" style="justify-content: space-between;">Vertex B:<input type="number" class="input" id="vbx" value="-0.25"> <input type="number" class="input" id="vby" value="-0.25"> </div>
-                                    <div id="textIn" style="justify-content: space-between;">Text Content: <textarea class="input" id="text" style="width: 100%;" value="Default Text"></textarea></div>
                                 </div>
                                 <div id="area4" class="area4">
                                     <div id="textureIn" style="justify-content: space-between;">Texture:                 <select class="select" name="texture" id="texture">
@@ -266,63 +256,8 @@
                             </div>
                             <div id="removeEntity" class="removeEnt"><div style="display: inline-block; width: 50%;"><button class="button reset" onclick="removeEntity()" title="Rmove Entity" style="width: 60%;"><i id="settingsIcon" class="fa-solid fa-trash"></i></button></div><div style="display: inline-block; width: 50%;"><button class="button add" onclick="duplicateEntity()" title="Duplicate Entity" style="width: 60%;"><i id="settingsIcon" class="fa-solid fa-clone"></i></button></div></div>
                             
-                            <!--<div id="animationSettings" class="animation">
-                                <div id="animationHeader"><b>Animation Settings</b><div id="animationButtonContainer" style="padding-left: 35px; display: inline-block; width: 30px;"><button id="animationButton" style="text-align:center; width:100%;" class="button add" onclick="handleAnimationToggle(event)" title="Start Animation"><i id="animationIcon" class="fa-solid fa-play"></i></button></div></div>
-                                <div id="animationType">Animation Type: <select class="select" name="animationType" id="animationTypeIn">
-                                    <option value="None">None</option>
-                                    <option value="position">Position</option>
-                                    <option value="rotation">Rotation</option>
-                                    <option value="color">Color</option>
-                                </select></div>
-                                <div id="animationContent">
-                                    <div id="AnimArea1">
-                                        <div id="animMovementType">Movement Type: <select class="select" name="movementType" id="movementTypeIn">
-                                            <option value="None">None</option>
-                                            <option value="t">Teleport</option>
-                                            <option value="start">Start to finish</option>
-                                            <option value="rubberband">Rubberband</option>
-                                        </select></div>
-                                    </div>
-                                    <div id="AnimArea2">
-                                        <div id="AnimMovementStartHeader">Start (&alpha;: deg, y: m, r: m): </div>
-                                    </div>
-                                    <div id="AnimArea3">
-                                        <div id="AnimMovementStart" style="display: grid; grid-template-areas: 'startX startY startZ';"><div id="startXIn" class="startX"><input type="text" class="input" id="startX" value="0"></div>
-                                        <div id="startYIn" class="startY"><input type="text" class="input" id="startY" value="0"></div>
-                                        <div id="startZIn" class="startZ"><input type="text" class="input" id="startZ" value="0"></div></div>
-                                    </div>
-                                    <div id="AnimArea4">
-                                        <div id="AnimMovementEndHeader">End (&alpha;: deg, y: m, r: m): </div>
-                                    </div>
-                                    <div id="AnimArea5">
-                                        <div id="AnimMovementEnd" style="display: grid; grid-template-areas: 'endX endY endZ';"><div id="endXIn" class="endX"><input type="text" class="input" id="endX" value="0"></div>
-                                        <div id="endYIn" class="endY"><input type="text" class="input" id="endY" value="0"></div>
-                                        <div id="endZIn" class="endZ"><input type="text" class="input" id="endZ" value="0"></div></div>
-                                    </div>
-                                    <div id="AnimArea6">
-                                        <div id="AnimMovementSpeedHeader">Speed (m/s)</div>
-                                    </div>
-                                    <div id="AnimArea7">
-                                        <div id="AnimMovementSpeed">
-                                            <input type="text" class="input" id="speedIn" value="100">
-                                        </div>
-                                    </div>
-                                    <div id="AnimArea8">
-                                        <div id="AnimMovementAccelHeader">Acceleration (m/s<sup>2</sup>)</div>
-                                    </div>
-                                    <div id="AnimArea9">
-                                        <div id="AnimMovementSpeed">
-                                            <input type="text" class="input" id="accelerationIn" value="1">
-                                        </div>
-                                    </div>
-                                    <div id="rotationContent"></div>
-                                </div>
-                            </div>-->
-                            
                             <div id="movementSettings" class="movement">
-
-                                <!-- TODO -->
-                                <div id="movementHeader" class="movementHeader" onclick="hideMovement()"><b>Movement Settings</b><div id="movementButtonContainer" style="padding-left: 10px; display: inline; width: 30px;"><button id="movementButton" style="text-align:center; width:15%;display: inline;" class="button add" onclick="handleMovementToggle(event)" title="Start Movement"><i id="movementIcon" class="fa-solid fa-play"></i></button><button id="stopIndividualButton" style="display:inline; text-align:center; width:15%;" class="button add" onclick="stopIndividual(event)" title="Stop Movement" disabled><i id="stopIcon" class="fa-solid fa-stop"></i></button></div></div>
+                                <div id="movementHeader" class="movementHeader" onclick="hideMovement()"><b>Movement Settings</b><div id="movementButtonContainer" style="padding-left: 10px; display: inline; width: 30px;"><button id="movementButton" style="text-align:center; width:15%;display: inline;" class="button add" onclick="handleMovementToggle(event)" title="Start Movement"><i id="movementIcon" class="fa-solid fa-play"></i></button><button id="stopIndividualButton" style="display:inline; text-align:center; width:15%;" class="button add" onclick="stopIndividual(event)" title="Stop Movement"><i id="stopIcon" class="fa-solid fa-stop"></i></button></div></div>
                                 <div id="movementType" class="movementType">Movement Type: <select class="select" name="movementType" id="movementTypeIn">
                                     <option value="None">None</option>
                                     <option value="Pause">Pause</option>
@@ -394,6 +329,7 @@
                                 <div class="renamePackage"><button style="text-align:center;" class="button add" onclick="renamePackage()">Rename</button></div>
                                 <div class="export"><button style="text-align:center;" class="button add" onclick="pastebinPost(true)"  title="Pastebin Export"><i class="fa-solid fa-cloud-arrow-up"></i></button></div>
                                 <div class="import"><button style="text-align:center;" class="button add" onclick="handleImport()"  title="Pastebin Import"><i class="fa-solid fa-cloud-arrow-down"></i></button></div>
+                                <div class="clear"><button style="text-align:center;" class="button reset" onclick="clearLocal()"  title="Clear Local Storage">Clear Local</button></div>
                             </div>
                             <div id="patternSettingsContainer" class="pattern-settings-container">
                                 <b class="patternSettingsHeader">Pattern Settings:</b>
@@ -413,8 +349,10 @@
             </div>
         </div>
         <div id="directions">
-        <button type="button" class="collapsible" id="directionsCollapse" style="width:100%;height:100%;"  title="Click for help" onclick="window.open('https://didsr.github.io/WebXR-tools/Custom/doc/','_blank')"><i class="fa-solid fa-circle-info"></i></button>
-
+            <button type="button" class="collapsible" id="directionsCollapse" style="width:100%;height:100%;"  title="Click for help" onclick="window.open('https://didsr.github.io/WebXR-tools/Custom/doc/','_blank')"><i class="fa-solid fa-circle-info"></i></button>
+            <br>
+            <br>
+            <button id="consoleButton" onclick="toggleConsole()">Toggle Console</button>
         </div>
 
         <div id="debug" style="display:none;">
@@ -441,7 +379,7 @@
         <script src="../lib/controller_profile.js"></script>
 
 
-        <script src="script.js" type="text/javascript"></script>
+        <!--<script src="script.js" type="text/javascript"></script>
         <script src="graphicInterface.js" type="text/javascript"></script>
         <script src="utility.js" type="text/javascript"></script>
         <script src="changeListeners.js" type="text/javascript"></script>
@@ -455,9 +393,86 @@
         <script src="sharing.js" type="text/javascript"></script>
         <script src="entityMovement.js" type="text/javascript"></script>
         <script src="animation.js" type="text/javascript"></script>
-        <script src="validator.js" type="text/javascript"></script>
+        <script src="validator.js" type="text/javascript"></script>-->
 
+        <script src="setup.js" type="text/javascript"></script>
+
+        <!-- animations -->
+        <!--<script src="animations/movementComponent.js" type="text/javascript"></script>-->
+        <script src="animations/animationControllers.js" type="text/javascript"></script>
         
+
+        <!-- entities -->
+        <script src="entities/bullseye.js" type="text/javascript"></script>
+        <script src="entities/checkerboard.js" type="text/javascript"></script>
+        <script src="entities/circle.js" type="text/javascript"></script>
+        <script src="entities/circularDotArray.js" type="text/javascript"></script>
+        <script src="entities/dotArray.js" type="text/javascript"></script>
+        <script src="entities/drawing.js" type="text/javascript"></script>
+        <script src="entities/editing.js" type="text/javascript"></script>
+        <script src="entities/gradient.js" type="text/javascript"></script>
+        <script src="entities/grille.js" type="text/javascript"></script>
+        <script src="entities/plane.js" type="text/javascript"></script>
+        <script src="entities/saving.js" type="text/javascript"></script>
+        <script src="entities/text.js" type="text/javascript"></script>
+        <script src="entities/timer.js" type="text/javascript"></script>
+        <script src="entities/triangle.js" type="text/javascript"></script>
+
+        <!-- graphics -->
+        <script src="graphics/draggableLists.js" type="text/javascript"></script>
+        <script src="graphics/expandableMenus.js" type="text/javascript"></script>
+        <script src="graphics/toggleModes.js" type="text/javascript"></script>
+        <script src="graphics/updateInterface.js" type="text/javascript"></script>
+
+        <!-- input -->
+        <script src="input/changeListeners.js" type="text/javascript"></script>
+        <script src="input/controllerInput.js" type="text/javascript"></script>
+        <script src="input/keyboardInput.js" type="text/javascript"></script>
+
+        <!-- packages -->
+        <script src="packages/handlePackageUpload.js" type="text/javascript"></script>
+        <script src="packages/loadDefault.js" type="text/javascript"></script>
+        <script src="packages/packageInput.js" type="text/javascript"></script>
+        <script src="packages/savePackage.js" type="text/javascript"></script>
+
+        <!-- textures -->
+        <script src="textures/textureInput.js" type="text/javascript"></script>
+
+        <!-- utils -->
+
+        <!-- entity -->
+        <script src="utils/entity/advanced.js" type="text/javascript"></script>
+        <script src="utils/entity/duplicateEntity.js" type="text/javascript"></script>
+        <script src="utils/entity/removeEntity.js" type="text/javascript"></script>
+        <script src="utils/entity/selectEntity.js" type="text/javascript"></script>
+
+        <!--extra -->
+        <script src="utils/extra/clipboard.js" type="text/javascript"></script>
+        <script src="utils/extra/consoleDump.js" type="text/javascript"></script>
+        <script src="utils/extra/hexToRgb.js" type="text/javascript"></script>
+        <script src="utils/extra/vrEventHandler.js" type="text/javascript"></script>
+
+        <!-- localStorage -->
+        <script src="utils/localStorage/clearLocal.js" type="text/javascript"></script>
+        <script src="utils/localStorage/addPackage.js" type="text/javascript"></script>
+        <script src="utils/localStorage/loadExisting.js" type="text/javascript"></script>
+       
+        <!-- package -->
+        <script src="utils/package/addRemovePacakge.js" type="text/javascript"></script>
+        <script src="utils/package/changePackage.js" type="text/javascript"></script>
+        <script src="utils/package/renamePackage.js" type="text/javascript"></script>
+
+        <!-- scene -->
+        <script src="utils/scene/addRemoveScene.js" type="text/javascript"></script>
+        <script src="utils/scene/displayNext.js" type="text/javascript"></script>
+        <script src="utils/scene/rename.js" type="text/javascript"></script>
+        <script src="utils/scene/resetScene.js" type="text/javascript"></script>
+
+        <!-- shareable link -->
+        <script src="utils/shareableLink/export.js" type="text/javascript"></script>
+        <script src="utils/shareableLink/import.js" type="text/javascript"></script>
+        <script src="utils/shareableLink/validator.js" type="text/javascript"></script>
+
     </body>
 
 </html>

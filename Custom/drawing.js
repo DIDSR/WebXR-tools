@@ -65,7 +65,7 @@ function addEntity(){
         el.setAttribute("material",{shader: "flat", color: "#"+R+G+B});
     }   else if ($("#entity :selected").text() == "text"){
         el.setAttribute("id","text"+textNum++);
-        el.setAttribute("text",{"value": "Default Text", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 12});
+        el.setAttribute("text",{"value": "Default Text", "color": "#FFFFFF",  width: 65, height: 65, align:"center", "wrapCount": 12});
         /*el.setAttribute("value","Default Text")
         el.setAttribute("color","#FFFFFF")
         el.setAttribute("height", .25*2000)
@@ -76,7 +76,7 @@ function addEntity(){
             return
         }
         el.setAttribute("id","timer"+timerNum++);
-        el.setAttribute("text",{"value": "00:00.00 ", "color": "#FFFFFF",  width: .25*250, height: .125*250, align:"center", "wrapCount": 9});
+        el.setAttribute("text",{"value": "00:00.00 ", "color": "#FFFFFF",  width: 65, height: 65, align:"center", "wrapCount": 9});
     }
     /* Set default universal stats */
 
@@ -266,7 +266,6 @@ function drawDotArray(rows,cols,size,spacing,color1,toggle,parent){
 }
 
 function drawCircularDotArray(radius,circles,dots,size,color1,toggle,parent){
-    console.log(parent)
     let c = 1;
     let middleDot = document.createElement("a-entity");
     middleDot.setAttribute("id",parent.id+"-center");
@@ -328,7 +327,6 @@ function updateJSON(){
     els.forEach(element => { 
         mov = JSON.parse(JSON.stringify(element.components.movement.attrValue))
         mov.status = -1;
-        console.log(mov)
         if(element.id.includes("gradient") || element.id.includes("grille")){
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, numBars: element.children.length, color2: element.components.color2.attrValue, childGeometry: element.children[0].components.geometry.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("checkerboard")){
@@ -341,7 +339,6 @@ function updateJSON(){
                     break;
                 }
             }
-            console.log(mat)
             jsonData[element.id] = {advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, widthReal: (element.children.length == 0 ? element.components.geometry.attrValue.width : element.children[2].components.geometry.attrValue.width),fill: element.components.fill.attrValue, geometry: element.components.geometry.attrValue, position:  {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: mat, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};
         } else if(element.id.includes("circle")){
             jsonData[element.id]={advanced: element.components.advanced.attrValue, angle: element.components.angle.attrValue, geometry: element.components.geometry.attrValue, fill: element.components.fill.attrValue, position: {x: element.components.position.attrValue.x, y: element.components.position.attrValue.y, z: element.components.position.attrValue.z}, material: element.components.material.attrValue, rotation: {x: element.components.rotation.attrValue.x, y: element.components.rotation.attrValue.y, z: element.components.rotation.attrValue.z}, movement: mov};

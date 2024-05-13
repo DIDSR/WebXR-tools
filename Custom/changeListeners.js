@@ -72,31 +72,6 @@ $("#accelerationIn").change(function() {
   });
 
 /* If the textbox for endZ value is changed */
-/*$("#key").change(function(e) {
-    if(keyBind.value.length > 1 || keyBind.value == 'm'){
-        alert('Invalid key, please choose a key other than \'m\' or leave this blank.')
-        return
-    }
-    i = 0;
-    while(i < entityCanvas.children.length){
-        if(entityCanvas.children[i] == selectedEntity){
-            break;
-        }
-        i++;
-    }
-    
-    if(movementKeyBinds[keyBind.value] == null){
-        movementKeyBinds[keyBind.value] = []
-    }
-    movementKeyBinds[keyBind.value].push(i);
-    mov = selectedEntity.getAttribute('mov')
-    if(mov.keyBind != ''){
-        movementKeyBinds[mov.keyBind].splice(movementKeyBinds[mov.keyBind].indexOf(i), 1);
-    }
-    mov.keyBind = keyBind.value
-  });*/
-
-/* If the textbox for endZ value is changed */
 $("#movementTypeIn").change(function() {
     editEntity();
   });
@@ -291,6 +266,11 @@ $("#vax").change(function() {
     editEntity();
   });
 
+  /* If the textbox for vax value is changed */
+$("#size").change(function() {
+    editEntity();
+  });
+
 /* If the textbox for vay value is changed */
 $("#vay").change(function() {
     editEntity();
@@ -388,67 +368,6 @@ $("#text").change(function() {
     editEntity();
 });
 
-/* sends entity back or forward one layer */
-/*function sendBack(isback){
-    let tmp = null;
-    let selected = els.indexOf(selectedEntity); /* finds layer number of current entity */
-    /* checks if back or forward */
-    /*if(isback){*/ /* if back */
-        /*if (selected != 0) {*/ /* if it is not on layer 0 */
-            /* swap z values */
-            /*tmp = els[selected].getAttribute("position").z;
-            els[selected].getAttribute("position").z = els[selected-1].getAttribute("position").z;
-            els[selected-1].getAttribute("position").z = tmp;*/
-
-            /* swap position in el arr (this preserves the layering order) */    
-            /*tmp = els[selected];
-            els[selected] = els[selected-1];
-            els[selected-1] = tmp;
-        }*/
-    /*} else {*/ /* if forward */
-        /*if (selected != els.length-1) {*/ /* if not the last layer */
-            /* swap z values */
-            /*tmp = els[selected].getAttribute("position").z;
-            els[selected].getAttribute("position").z = els[selected+1].getAttribute("position").z;
-            els[selected+1].getAttribute("position").z = tmp;*/
-
-            /* swap position in el arr (this preserves the layering order) */
-            /*tmp = els[selected];
-            els[selected] = els[selected+1];
-            els[selected+1] = tmp;
-        }
-    }
-}*/
-
-/* Raycasting with orthographic camera */
-/*var raycaster = new THREE.Raycaster();
-raycaster.layers.set(0);
-window.addEventListener("pointerup", function(e) {
-    var screenPos = new THREE.Vector2();
-    
-    screenPos.x = (e.clientX / window.innerWidth) * 2 - 1;
-    screenPos.y = - (e.clientY / window.innerHeight) * 2 + 1;
-    
-    raycaster.setFromCamera(screenPos, scene.camera);
-
-    var rays = raycaster.intersectObjects(pool, true);
-    let i = rays.length;
-    if(i > 0){
-        currMin = rays[0].distance;
-        selected = rays[0].object.el;
-        while (i > 0) {
-            i--;
-            if(rays[i].distance < currMin){
-                currMin = rays[i].distance;
-                selected = rays[i].object.el;
-            }
-        }
-        selected = document.getElementById(selected.id.split("-")[0]);
-        console.log(selected);
-        selectNew(selected);
-    }
-});*/
-
 
 finished = false
 var ind = 0
@@ -474,6 +393,10 @@ scene_display_input.addEventListener("change", function() {
 
             reader.onload = function() {
                 fileContent = JSON.parse(reader.result);
+                if(!validateJSON(fileContent)){
+                    alert('Invalid package');
+                    return
+                }
                 names[fileName] = ""
                 for (const [name, value] of Object.entries(fileContent['scenes'])) {
                     const re = /^[a-zA-Z0-9-_ ]+( \([0-9]+\))?$/
@@ -493,13 +416,6 @@ scene_display_input.addEventListener("change", function() {
                 packageSelect.options.add(new Option(fileName,fileName))
                 scenes[fileName] = fileContent['scenes']
                 names[fileName] = {}
-                /*Object.keys(fileContent['scenes']).forEach( currName => {
-                    if(names[fileName] == null){
-                        names[fileName][currName] = names[fileName][currName] + 1
-                    } else {
-                        names[fileName][currName] = 1
-                    }
-                });*/
                 textures = fileContent['textures']['textureValues']
                 uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
                 cb();
@@ -535,7 +451,6 @@ scene_display_input.addEventListener("change", function() {
                 return false;
             }
             reader.readAsText(itm);
-            console.log(fileName)
             
             
             // call cb when finished
@@ -549,8 +464,7 @@ scene_display_input.addEventListener("change", function() {
     })
     // when it's done....
     myLoop.then(()=>{
-        //patternList.innerHTML = ''
-        console.log('then');
+
         packages[fileName] = ''
         let arr = Object.keys(scenes)
         let len = arr.length
@@ -596,26 +510,7 @@ scene_display_input.addEventListener("change", function() {
         
         packageSelect.value = fileName
         changePackage()
-        /*i = 0;
-        while(i < len){
-            var toggle_button = '<p><input type="checkbox" id="'+arr[i]+'" name="'+arr[i]+'" onclick="handlePatternSelect(this)"'
-            let res = Array.from(patternDisplay.children).reduce(function(acc, x) {
-                acc = acc || x.text == arr[i]
-                return acc;
-              }, false);
-            if(res == true){
-                toggle_button += 'checked/>'
-            
-            } else {
-                toggle_button += '/>'
-            }
-            toggle_button += '<label for="'+arr[i]+'">'+arr[i]+'</label></p>';
-            $('#patternList').append(toggle_button)
-            //pattern.options.add(new Option(arr[i], arr[i]))
-            i++
-        }*/
-
-    
+        
     });
 
 /**
@@ -768,7 +663,6 @@ document.addEventListener('keydown', (e) => {
             return
         }
         for(const i of movementKeyBinds[e.key]){
-            console.log('i')
             if(entityCanvas.children[i].getAttribute('mov').status != 0){
                 stopMovement(entityCanvas.children[i])
             } else {

@@ -38,7 +38,7 @@ function editEntity(){
         selectedEntity.setAttribute("position",{x: parseFloat($("#x").val()), y: parseFloat($("#y").val()), z: -parseFloat($("#z").val())});
         
         p1 = {x: parseFloat($("#startX").val()), y: parseFloat($("#startY").val()), z: -parseFloat($("#startZ").val())}
-        p2 = {z: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), z: -parseFloat($("#endZ").val())}
+        p2 = {x: parseFloat($("#endX").val()), y: parseFloat($("#endY").val()), z: -parseFloat($("#endZ").val())}
 
         let xDelta = p2.x-p1.x
         let yDelta = p2.y-p1.y
@@ -75,7 +75,6 @@ function editEntity(){
     let selectedIndex = parseFloat(animationList.getAttribute('selectedIndex'))
     let i = 0;
     let counter = -1;
-    console.log("Value of selected index: "+selectedIndex)
     // have to take into account rebounds from rubberband
     while(i < animationComponent.types.length){
       if(animationComponent.types[i] != 'Rebound'){
@@ -87,9 +86,6 @@ function editEntity(){
       i++;
     }
 
-    
-    console.log("Value of i: "+i)
-
     if(i < animationComponent.types.length-1 && animationComponent.types[i+1] == 'Rebound'){
         animationComponent.startPoints.splice(i+1,1);
         animationComponent.endPoints.splice(i+1,1);
@@ -99,7 +95,6 @@ function editEntity(){
     }
     if($('#movementTypeIn').val() == 'Pause'){
         animationComponent.types[i] = 'Pause'
-        console.log(parseFloat($("#speed").val()))
         animationComponent.initialVelocities[i] = parseFloat($("#startY").val());
         animationComponent.accelerations[i] = 0;
         animationComponent.status = -1
@@ -145,13 +140,18 @@ function editEntity(){
     if(animationList.childElementCount != 0){
         animationList.children[selectedIndex].innerText = $('#movementTypeIn').val()
     }
-    
-    /* Adds a texture if a texture input is selected */
-    if($("#texture").val() == "none"){
+
+    if(!selectedEntity.getAttribute('id').includes("plane")){
         selectedEntity.setAttribute("material",{shader: "flat", src: "", color: $("#color").val()});
     } else {
-        selectedEntity.setAttribute("material",{shader: "flat", src: "#"+$("#texture").val(), color: $("#color").val()});
-    }
+        /* Adds a texture if a texture input is selected */
+        if($("#texture").val() == "none"){
+            selectedEntity.setAttribute("material",{shader: "flat", src: "", color: $("#color").val()});
+        } else {
+            selectedEntity.setAttribute("material",{shader: "flat", src: "#"+texture.selectedOptions[0].value, color: $("#color").val()});
+        }
+    } 
+    
 
     if(selectedEntity.getAttribute("id").includes("circle")){  /* circle only changes */
         /* check for valid inputs */
@@ -424,47 +424,33 @@ function editEntity(){
         drawBullseye(parseFloat($("#ringPitchIn").val()),parseFloat($("#numRingsIn").val()),$("#color").val(),selectedEntity);
     } else if (selectedEntity.getAttribute("id").includes("text")){ /* text only changes */
             
-        if(isNaN(parseFloat($("#width").val()))){
-            alert("Please enter a valid width");
-            return;
-        }
-        if(isNaN(parseFloat($("#height").val()))){
-            alert("Please enter a valid height");
+        if(isNaN(parseFloat($("#size").val()))){
+            alert("Please enter a valid size");
             return;
         }
         if(($("#text").val()) == ""){
             alert("Please enter a valid text option");
             return;
         }
-        if(parseFloat($("#height").val()) < 0){
-            alert("Please enter a valid height ( >= 0 )");
+        if(parseFloat($("#size").val()) < 0){
+            alert("Please enter a valid size ( >= 0 )");
             return;
-        } else if(parseFloat($("#width").val()) < 0){
-            alert("Please enter a valid width ( >= 0 )");
-            return; 
         }
 
-        selectedEntity.setAttribute('text', {value: $("#text").val(), width: parseFloat($("#width").val()), height: parseFloat($("#height").val()), color: $("#color").val(), wrapCount: $("#text").val().length})
+        selectedEntity.setAttribute('text', {value: $("#text").val(), width: parseFloat($("#size").val()), height: parseFloat($("#size").val()), color: $("#color").val(), wrapCount: $("#text").val().length})
 
     } else if (selectedEntity.getAttribute("id").includes("timer")){ /* text only changes */
                 
-        if(isNaN(parseFloat($("#width").val()))){
-            alert("Please enter a valid width");
+        if(isNaN(parseFloat($("#size").val()))){
+            alert("Please enter a valid size");
             return;
         }
-        if(isNaN(parseFloat($("#height").val()))){
-            alert("Please enter a valid height");
+        if(parseFloat($("#size").val()) < 0){
+            alert("Please enter a valid size ( >= 0 )");
             return;
-        }
-        if(parseFloat($("#height").val()) < 0){
-            alert("Please enter a valid height ( >= 0 )");
-            return;
-        } else if(parseFloat($("#width").val()) < 0){
-            alert("Please enter a valid width ( >= 0 )");
-            return; 
         }
 
-        selectedEntity.setAttribute('text', {value: selectedEntity.getAttribute('text').value, width: parseFloat($("#width").val()), height: parseFloat($("#height").val()), color: $("#color").val(), wrapCount: selectedEntity.getAttribute('text').value.length})
+        selectedEntity.setAttribute('text', {value: selectedEntity.getAttribute('text').value, width: parseFloat($("#size").val()), height: parseFloat($("#size").val()), color: $("#color").val(), wrapCount: selectedEntity.getAttribute('text').value.length})
 
     }
     updateJSON() // update the json file of current scene

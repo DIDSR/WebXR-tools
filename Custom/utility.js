@@ -11,7 +11,6 @@ function selectNew(clickedEntity){
         entitySelector.value = clickedEntity.getAttribute("id"); /* update dropdown */
     } else { /* if selected via dropdown */
         selectedEntity = scene.querySelector("#"+$("#entityId :selected").text()); /* update selected entity */
-        console.log(selectedEntity)
 
     }
     /* Update stats in edit section */
@@ -43,23 +42,6 @@ function removeEntity(){
     }
     els.splice(els.indexOf(selectedEntity),1);
     pool.splice(pool.indexOf(selectedEntity.object3D),1);
-    /*if(selectedEntity.id.includes("plane")){
-        planeNum--;
-    } else if(selectedEntity.id.includes("circle")){
-        circleNum--;
-    } else if(selectedEntity.id.includes("triangle")){
-        triangleNum--;
-    } else if(selectedEntity.id.includes("checkerboard")){
-        checkerboardNum--;
-    } else if(selectedEntity.id.includes("gradient")){
-        gradientNum--;
-    } else if(selectedEntity.id.includes("grille")){
-        grilleNum--;
-    } else if(selectedEntity.id.includes("circularDotarray")){
-        circularDotarrayNum--;
-    } else if(selectedEntity.id.includes("dotarray")){
-        dotarrayNum--;
-    }*/
     entityCanvas.removeChild(selectedEntity);
     for (var i=0; i<entitySelector.length; i++) {
         if (entitySelector.options[i].value == selectedEntity.id)
@@ -157,12 +139,6 @@ function duplicateEntity(){
     el.setAttribute("click-checker","");
     numAdded++;
     entityCanvas.appendChild(el); /* adds entity to scene */
-    /*if(el.getAttribute("mov").keyBind != ""){
-        if(movementKeyBinds[el.getAttribute("mov").keyBind] == null){
-            movementKeyBinds[el.getAttribute("mov").keyBind] = []
-        }
-        movementKeyBinds[el.getAttribute("mov").keyBind].push(entityCanvas.children.length-1);
-    }*/
 
     /* adds option to dropdown */
     var option = document.createElement("option");
@@ -174,49 +150,6 @@ function duplicateEntity(){
     updateJSON();
     setTimeout(() => {  selectNew(el) }, 100);
 }
-
-/* handles changes in selected pattern */
-//var displayOrder = ['default'];
-/*function handlePatternSelect(snapshot){
-    curr = snapshot.id
-    if(displayOrder.indexOf(curr) == -1){
-        displayOrder.push(curr)
-    } else {
-        displayOrder.splice(displayOrder.indexOf(curr),1)
-    }
-    while(patternDisplay.options.length != 0){
-        patternDisplay.options.remove(patternDisplay.options[0])
-    }
-    patternDisplay.selectedIndex = 0
-    i = 0
-    len = displayOrder.length
-    while(i < len){
-        if(i == 0){
-            patternDisplay.options.add(new Option(displayOrder[i], displayOrder[i], true, true))
-            revertChanges()
-            addEntitiesFromScene(scenes[displayOrder[i]])
-
-        } else {
-            patternDisplay.options.add(new Option(displayOrder[i], displayOrder[i]))
-        }
-        i++;
-    }
-}*/
-
-/* displays current pattern selected */
-/*function displayCurrentPattern(snapshot){
-    let len = snapshot.options.length;
-    let i = 0;
-    let sum = 0;
-    while(i < len){
-        curr = snapshot.options[i]
-        if(curr.selected){
-            revertChanges()
-            addEntitiesFromScene(scenes[curr.text]);
-        } 
-        i++;
-    }
-}*/
 
 /* resets current scene */
 function resetScene(){
@@ -518,16 +451,15 @@ function switchToAdvanced(e){
     endZ.disabled = !endZ.disabled
     advanced.style.backgroundColor == '' ? advanced.style.backgroundColor = '#00FF00' : advanced.style.backgroundColor =''
     updateStats()
-    //editEntity()
   }
 
 /* listens for entering vr and removes restrictions on clicking through patterns */
-scene.addEventListener('enter-vr',function(){
+scene.addEventListener('enter-vr',function(e){
     block = false;
     if(isNaN(parseInt(patternList.getAttribute('selectedIndex')))){
         alert('No scene is selected, please exit immersive mode and select a scene.')
     }
-    
+    controlsInterval = setInterval(findControls,10);
   });
 
 /* listens for exiting vr and restricts clicking through patterns */
@@ -577,7 +509,6 @@ async function highlightSelection(ent){
         //tileSizeNum = ent.children[0].children[0].components.geometry.attrValue.width;
         newGeom = {primitive: 'ring', radiusOuter: ent.children[0].components.geometry.attrValue.radiusOuter*1.5, radiusInner: 0};
     } else if(selectedEntity.id.includes("text") || selectedEntity.id.includes("timer")){
-        console.log(ent.components.text.attrValue.wrapCount)
         let width = ent.components.text.attrValue.value.length * (ent.components.text.attrValue.width / ent.components.text.attrValue.wrapCount);
         let height = ent.components.text.attrValue.height;
         newGeom = {primitive: 'plane', width: width, height: height};
@@ -801,7 +732,6 @@ function renamePackage(){
     while(packageName == ""){
         packageName = prompt('Please enter a valid package name');
     }
-    console.log(packageName)
     const re = /^[a-zA-Z0-9-_ ]+$/
     if(!re.test(packageName)){
         alert('Package name is invalid. '+ packageName +' Limit names to only alphanumerics, -, _, or spaces.')
@@ -840,9 +770,6 @@ function pastePattern(){
         } else {
             names[packageSelect.value][currName] = 1
         }
-
-        console.log(currName)
-        console.log(clipboard[name])
 
         scenes[packageSelect.value][currName] = clipboard[name]
         let textContent = currName;
@@ -912,10 +839,18 @@ function startTimer(){
         } else {
             time = ""+time
         }
-        //console.log(time)
-        //textVal.value = minutes+":"+seconds+":"+time
+
         textVal.value = minutes+":"+seconds+":"+time[0]+time[1]+" "
         timer.setAttribute('text',textVal)
 
     },10)
+}
+
+function toggleConsole() {
+    if(debug.style.display == "block"){
+        debug.style.display = "none";
+    } else {
+        debug.style.display = "block";
+
+    }
 }

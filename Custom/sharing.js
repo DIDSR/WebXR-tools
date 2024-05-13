@@ -27,7 +27,6 @@ async function handleImport(){
                     window.history.pushState('object', document.title, newURL);
                 }
                 
-                console.log(url.split("?")[1])
                 alert('Success')
                 return true;
             } else {
@@ -64,7 +63,7 @@ async function handleImport(){
                     alert('Success')
                     return true;
                 }
-                console.log('Handling failed')
+                alert.log('Handling failed')
                 return false;
             } else {
                 alert('Invalid link');
@@ -82,7 +81,6 @@ async function localLinkImport(url){
     ids = url.split('?id=')[1].split(',');
     let i = 0;
     while(i < ids.length){
-        console.log(ids[i])
         var res = pastebinFetch("https://didsr.pythonanywhere.com/webxrtools/get?id="+ids[i]).then((result) => {
             return result
         });
@@ -102,30 +100,9 @@ async function validateLink(url){
             return null
             
         } else {
-            console.log(url)
            return res.json()
         }
     }).catch((error) => alert('Failed to fetch from: '+url+' with error '+error));
-    if(fileContent == null || !fileContent.hasOwnProperty('filename') || !fileContent.hasOwnProperty('date') || !fileContent.hasOwnProperty('scenes') || !fileContent.hasOwnProperty('textures')){
-        return false;
-    }
-    return true;
+    return validateJSON(fileContent)
 
 }
-
-
-
-    // go through each property
-        // if property is not filename, date, scenes, or textures JSON has been tampered with
-
-        
-
-        
-
-        // if scenes
-            
-
-        // if textures
-            // check that texture urls do not lead to dangerous place and image does not contain malicious code
-
-
