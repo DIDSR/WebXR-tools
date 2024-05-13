@@ -19,7 +19,7 @@ body {
   #info{
     position: absolute;
     max-height: 90vh;
-    max-width: 400px;
+    max-width: 500px;
     left: 10px;
     top: 10px;
     background-color: rgba(211,211,211, 1);
@@ -51,7 +51,7 @@ body {
     position: absolute;
     width: 70vw;
     height: 50vh;
-    right: 10px;
+    left: 10px;
     top: 10px;
     background-color: rgba(211,211,211, 1);
     color: Black;
@@ -101,6 +101,23 @@ body {
 }
 
 input[type=text]{
+  width:70px;
+  text-align: center;
+  background:rgb(255,255,255);
+  border: 1px solid rgb(138, 138, 138);
+  color:black;
+  /*float:right;
+  top: 50%;
+  left:50%;*/
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]{
   width:70px;
   text-align: center;
   background:rgb(255,255,255);
@@ -201,15 +218,17 @@ input[type=text]{
 .renamePackage { grid-area: RenamePackage; text-align: center;} 
 .export { grid-area: Export; text-align: center;}
 .import { grid-area: Import; text-align: center;}
+.clear { grid-area: Clear; text-align: center;}
 .package-settings-container{
   display: grid;
   grid-template-areas:
     'PackageSettingsHeader'
     'RenamePackage'
     'Export'
-    'Import';
+    'Import'
+    'Clear';
     grid-template-columns: 100%;
-    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
     height: 100%;
     width: 100%;
     overflow-y: auto;
@@ -239,12 +258,17 @@ input[type=text]{
     display: grid;
     grid-template-areas:
     'PackageSettings'
-    'PatternSettings';
+    'PatternSettings'
+    'AnimationList';
     grid-template-columns: 100%;
-    grid-template-rows: 30% 70%;
+    grid-template-rows: 30% 70% 100%;
     height: 100%;
     width: 100%;
     overflow-y: auto;
+  }
+
+  .animationListContainer {
+    grid-area: AnimationList;
   }
 
 .display-grid {
@@ -276,7 +300,7 @@ input[type=text]{
 .item11 { grid-area: PastebinPOST; text-align: center;}
 
 
-.universalHeader {grid-area: UniversalHeader; text-align: center; cursor: pointer; padding-top: 12px;}
+.universalHeader {grid-area: UniversalHeader; text-align: center; cursor: pointer; padding-top: 3px;}
 .universalHeader:hover {background-color: #888;}
 .position {grid-area: Position; text-align: left;}
 .rotation {grid-area: Rotation; text-align: left;}
@@ -331,18 +355,78 @@ input[type=text]{
     grid-template-rows: 13% 17% 17% 17% 17% 17%;
   }
 
-.removeEnt {grid-area: Buttons; text-align: center; padding-top: 20px;}
+.removeEnt {grid-area: Buttons; text-align: center; padding-top: 10px; border-bottom: 1px solid black;}
+
+
+.movementHeader {grid-area: MovementHeader;  text-align: center; padding-top: 3px;}
+.movementType {grid-area: MovementType;  text-align: center; padding-top: 10px;}
+.startHeader {grid-area: startHeader; text-align: center;}
+.startX {grid-area: startX; text-align: center;}
+.startY {grid-area: startY; text-align: center;}
+.startZ {grid-area: startZ; text-align: center;}
+.endHeader {grid-area: endHeader; text-align: center;}
+.endX {grid-area: endX; text-align: center;}
+.endY {grid-area: endY; text-align: center;}
+.endZ {grid-area: endZ; text-align: center;}
+.speedHeader {grid-area: speedHeader; text-align: center;width: 110%;}
+.accelerationHeader {grid-area: accelerationHeader; text-align: center; left: -5%; position: relative;}
+.keyHeader {grid-area: keyHeader; text-align: center; display: 'none'}
+.speed {grid-area: speed; text-align: center; padding-top: 13px;}
+.acceleration {grid-area: acceleration; text-align: center; padding-top: 13px;}
+.key {grid-area: key; text-align: center; padding-top: 13px; display: 'none'}
+
+.movement {grid-area: Movement;
+  text-align: center;
+  border-bottom: 1px solid #999;
+  display: grid;
+  grid-template-areas:
+  'MovementHeader MovementHeader MovementHeader'
+  'MovementType MovementType MovementType'
+  'startHeader startHeader startHeader'
+  'startX startY startZ'
+  'endHeader endHeader endHeader'
+  'endX endY endZ'
+  'speedHeader keyHeader accelerationHeader'
+  'speed key acceleration';
+  grid-template-rows: 11% 13% 11% 13% 11% 13% 12% 12%;
+  grid-template-columns: 33% 34% 33%;
+  font-size: 15px;
+}
+
+.animation {grid-area: Animation;
+  text-align: center;
+  border-bottom: 1px solid #999;
+  display: none;
+  grid-template-areas:
+  'AnimationHeader'
+  'AnimationType'
+  'AnimationContent';
+  grid-template-rows: 12% 12% 76%;
+  grid-template-columns: 100%;
+}
+
+.animationContent{
+  grid-area: AnimationContent;
+  display: none;
+  grid-template-areas: 
+  'AnimArea1'
+  'AnimArea2'
+  'AnimArea3'
+  'AnimArea4'
+  'AnimArea5'
+  'AnimArea7';
+}
 
 .entity-container {
   display: none;
   grid-template-areas: 
   'Universal'
   'Specific'
+  'Movement'
   'Buttons';
-  grid-template-rows: 40% 50% 5%;
+  grid-template-rows: 50% 50% 60% 8%;
   height: 90%;
   width: 100%;
-  border-bottom: 1px solid black;
 }
 
 
