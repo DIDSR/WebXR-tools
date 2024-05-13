@@ -1,168 +1,245 @@
-# Manual User Interface Tests #
+# Pattern Generation Tool #
+The Pattern Generation Tool provides a user interface for creating, editing, and displaying [WebXR](https://immersiveweb.dev/) scenes.  
+Scenes consist of 2 and 3 dimensional entities taken from [A-Frame](https://aframe.io/docs/1.4.0/core/entity.html).  
+These entities can be manipulated in a variety of different ways to create flexible patterns. 
+Scenes are grouped together in packages that can be downloaded and shared.
 
-Begin by opening this link: https://didsr.github.io/WebXR-tools/Custom/
+### Features
+- Create packages of scenes that can be shared via a file or a link.
+- Order of scenes within the package can be easily changed.
+- Scenes are fully editable upon uploading or downloading.  
+- Scenes can be switched between using arrow keys or when in immersive mode, the buttons on the left and right controllers.
+- Default package available containing commonly used patterns:
+   - Red: A solid red background
+   - Green: A solid green background
+   - Blue: A solid blue background
+   - White: A solid white background
+   - Grille: A black and white background
+   - Crosshair: A white crosshair
+   - Line: A white vertical line
+   - Dot Array: A matrix of dots
+   - Circular Dot Array: A dot array arranged in a circle
+   - Checkerboard_w: A checkerboard with a white center tile
+   - Checkerboard_b: A checkerboard with a black center tile
+   - Ring_w1: A bullseye with a high pitch
+   - Ring_w2: A bullseye with a medium pitch
+   - Ring_w5: A bullseye with a low pitch
 
-## Test 1- Adding and editing a package
-This test will examine the package and pattern systems.  
-   1. Add a package with the name "Test 1" by pressing the *plus* icon next to **Packages**
-   2. Add three patterns to this package by pressing the *plus* icon next to **Pattern List**
-      - Name the first pattern "Pattern 1"
-      - Name the second pattern "Pattern 2"
-      - Name the third pattern "Pattern 3"
 
-   At this point, the tool should look like this:  
-   ![image](../Images/test1_1.PNG)
+# Directions For Use #
+### Packages
+1. [Create a Package](#createPackage)
+2. Edit a Package
+3. Display a Package
+4. Save a Package
+5. Share a Package
 
-   3. Reorder the patterns so that "Pattern 3" is the first pattern, "Pattern 2" is the second pattern, and "Pattern 1" is the last pattern
-      - Do this by dragging "Pattern 3" and dropping it in the first position
-      - Drag "Pattern 2" and drop it in the second position
-   4. Switch packages to the "default" package
-   5. Multi-select the patterns "crosshair" and "ring_w2" by holding Ctrl while clicking on the patterns
-   6. Copy these patterns by pressing Ctrl+C on windows or Cmd+C on Mac
-   7. Switch packages to the "Test 1 Package" package
-   8. Paste the copied patterns by pressing Ctrl+V or Cmd+V
+### Patterns
+1. Create a Pattern
+2. Edit a Pattern
+3. Display a Pattern
+4. Save a Pattern
+5. Share a Pattern
 
-   At this point, the tool should look like this:
-   ![image](../Images/test1_2.PNG)
 
-## Test 2- Adding and editing a pattern
-This test will examine the pattern and entity systems.  
-   9. Rename the "crosshair" pattern to "Pattern 4"
-       - Select the "crosshair" pattern by clicking on it
-       - Open settings by pressing the *gear* icon at the top right of the tab
-       - Under **Pattern Settings** select the *Rename* button
-       - Enter "Pattern 4" in the textbox and press OK
-   10. Delete the "ring_w2" pattern by pressing the *trash* icon next to **Pattern List**
-       - Select OK on the confirmation
-   11. Close the settings by pressing the *X* icon at the top right of the tab
-   11. Reorder the patterns so that "Pattern 4" is first, "Pattern 3" is second, "Pattern 2" is third, and "Pattern 1" is last
+<div id='createPackage'/>
+## Create a Package
 
-   At this point, the tool should look like this:   
-   ![image](../Images/test1_3.PNG)
+## Edit a Package
 
-   12. Select "Pattern 3"
-   13. Switch the toggle at the top of the tab to be in *Edit* mode
-   14. Add a circle, plane, and triangle to this pattern
-       - Select circle as the type of entity to add from the dropdown next to **Type of entity:**
-       - Press the *Add to Pattern* button to add it to the pattern
-       - Repeat for plane and triangle
-       - The entities will spawn at random places on the screen
-   15. Switch the second toggle to *Edit Entity* mode
-   16. Edit the Circle
-       - Click on the circle or select "circle0" from the **Entity** dropdown
-       - Move the circle so that it is in position (0, 0, 250)
-       - Change the color of the circle to white by selecting it from the color selector or entering #ffffff
-       - Increase the radius of the circle to 40m
-       - Decrease the border size to 15m
-   17. Edit the Plane
-       - Click on the plane or select "plane0" from the **Entity** dropdown
-       - Move the plane so that it is in position (-20, 100, 250)
-       - Change the color of the plane to blue by selecting it from the color selector or entering #0000ff
-       - Increase the height of the plane to 100m
-       - Decrease the width of the plane to 20m
-       - If desired, add a texture from the drop down or upload an image file to use as a texture
-          - If an uploaded texture is added here, one step will change in Part 3
-          - Adding a texture will rescale the entity to meet the aspect ratio of the image being used
-   18. Edit the Triangle
-       - Click on the triangle or select "triangle0" from the **Entity** dropdown
-       - Move the triangle so that it is in position (20, -100, 250)
-       - Change the color of the triangle to green by selecting it from the color selector or entering #00ff00
-       - Change vertex A to be at (0, 50)
-       - Change vertex B to be at (-50, -50)
-       - Change vertex C to be at (50, -50)
-   At this point the tool should look like this:
+## Display a Package
 
-   ![image](../Images/test2_1.PNG)
+## Save a Package
 
-   19. Switch the first toggle to *Display* mode
-   20. Select "Pattern 2"
-   21. Switch the toggle at the top of the tab to be in *Edit* mode
-   22. Add a gradient, checkerboard, and grille to this pattern
-       - Select gradient as the type of entity to add from the dropdown next to **Type of entity:**
-       - Press the *Add to Pattern* button to add it to the pattern
-       - Repeat for checkerboard and grille
-       - The entities will spawn at random places on the screen
-   23. Switch the second toggle to *Edit Entity* mode
-   24. Edit the Gradient
-       - Click on the gradient or select "gradient0" from the **Entity** dropdown
-       - Move the gradient so that it is in position (0, 150, 250)
-       - Change the primary color of the gradient to white by selecting it from the color selector or entering #ffffff
-       - Increase the bar height to 20m
-       - Decrease the bar width to 3m
-       - Increase the number of bars to 100
-       - Change the secondary color to red by selecting it from the color selector or entering #ff0000
-   25. Edit the Checkerboard
-       - Click on the checkerboard or select "checkerboard0" from the **Entity** dropdown
-       - Move the plane so that it is in position (0, 0, 250)
-       - Change the primary color of the checkerboard to purple by selecting it from the color selector or entering #800080
-       - Increase the number of columns to 20
-       - Increase the number of rows to 19
-       - Increase the size of the tiles to 10m
-       - Change the secondary color to white by selecting it from the color selector or entering #ffffff
-   26. Edit the grille
-       - Click on the grille or select "grille0" from the **Entity** dropdown
-       - Move the gradient so that it is in position (0, -150, 250)
-       - Change the primary color of the grille to orange by selecting it from the color selector or entering #ffa500
-       - Decrease the bar height to 20m
-       - Decrease the bar width to 3m
-       - Increase the number of bars to 100
-       - Change the secondary color to white by selecting it from the color selector or entering #ffffff
-   At this point the tool should look like this:
-![image](../Images/test2_2.png)
+## Share a Package
 
-   27. Switch the first toggle to *Display* mode
-   28. Select "Pattern 1"
-   29. Switch the toggle at the top of the tab to be in *Edit* mode
-   30. Add a dot array, circular dot array, and bullseye to this pattern
-       - Select dot array as the type of entity to add from the dropdown next to **Type of entity:**
-       - Press the *Add to Pattern* button to add it to the pattern
-       - Repeat for circular dot array and bullseye
-       - The entities will spawn at random places on the screen
-   31. Switch the second toggle to *Edit Entity* mode
-   32. Edit the Dot Array
-       - Click on the dot array or select "dotarray0" from the **Entity** dropdown
-       - Move the dot array so that it is in position (-20, -100, 250)
-       - Change the color of the dot array to green by selecting it from the color selector or entering #00ff00
-       - Increase the number of columns to 7
-       - Increase the number of rows to 7
-       - Increase the radius of the dots to 3m
-       - Decrease the spacing of the dots to 5m
-       - Toggle on the center dot being filled
-   33. Edit the Circular Dot Array
-       - Click on the circular dot array or select "circularDotarray0" from the **Entity** dropdown
-       - Move the circular dot array so that it is in position (0, 0, 249)
-       - Change the color of the dot array to white by selecting it from the color selector or entering #ffffff
-       - Increase the number of dots to 15
-       - Increase the number of rings to 6
-       - Keep the radius of the dots at 2m
-       - Keep the spacing of the dots at 10m
-       - Keep the center dot hollow
-   34. Edit the bullseye
-       - Click on the bullseye or select "bullseye0" from the **Entity** dropdown
-       - Move the bullseye so that it is in position (0, 0, 250)
-       - Change the primary color of the bullseye to blue by selecting it from the color selector or entering #0000ff
-       - Increase the number of rings to 6
-       - Keep the ring pitch at 5m
-At this point the tool should look like this:
-![image](../Images/test2_3.PNG)
 
-## Test 3- Saving and uploading a package
-This test will examine the sharing feature of the tool.
 
-   35. Switch the first toggle to *Display* mode
-   36. Select the save package button next to **Packages:**
-       - Note: if an uploaded texture was used in Test 2, select cancel when prompted to include textures
-       - Uploaded textures cause generated files to be too large for the link generation service
-   37. Make a note of the package id saved in the url after "?id=" ('?id=<package_id>')
-   38. Refresh the page
-   39. Ensure that the package "Test 1" is loaded and the patterns are correct
-   40. Upload the "Test 1 Comparison" package
-       - Open settings by hitting the *gear* icon at the top right of the tab
-       - Press the import button denoted by a cloud with a down arrow
-       - Paste this link into the textbox: https://didsr.github.io/WebXR-tools/Custom/?id=598zgfm3bqw9
-   41. Check that there is now a package called "Test 1 Comparison" with the same patterns as those created in these tests
-   42. To interactively check for correct results, navigate between the two packages and ensure entity values are the same
-   43. Close the tab completely
-   44. Navigate back to the starting page of the tool (https://didsr.github.io/WebXR-tools/Custom/)
-   45. Select "Test 1" and "Test 1 Comparison" from the **Recent Packages** dropdown and ensure that they are correct
 
+
+
+
+
+
+## Displaying Patterns
+
+
+
+### Selecting a Pattern
+To select a pattern, first ensure that the checkbox for the pattern under ***Pattern List*** has been checked. Then select the desired pattern from the ***Pattern Display*** dropdown. 
+
+### Adding a Pattern
+A pattern a can be added using the ***Add Pattern*** button. A name for the added pattern can be specified using textbox above the ***Add Pattern*** button.
+
+### Removing a Pattern
+Using the ***Remove Pattern*** button, the currently displayed pattern can be removed.
+
+### Selecting Multiple Patterns
+To select multiple patterns, check all of the desired checkboxes under ***Pattern List***. 
+**The order that the patterns are selected in will be the display order**
+The current pattern can be rotated through using the up or down arrows on the keyboard or the buttons on the left and right controllers.
+Any buttons on the left controller step back one pattern and any buttons on the right controller step forward one pattern.
+
+### Displaying the Desired Pattern
+To display the pattern, hit the ***VR*** button in the bottom right hand corner.
+[**Check the demos folder for some basic editable patterns**](./demos)
+
+### Saving and Uploading a Group of Patterns
+Multiple patterns can be saved together by hitting the ***Save Selected Patterns*** button. This will save all currently selected patterns from the ***Pattern List*** as a JSON file.
+To upload a group of patterns, press the ***Upload Patterns*** button and select the desired JSON file. This JSON file can contain one or more patterns and will add them all to the ***Pattern List***.
+
+## Editing Patterns
+
+### Uploading a Pattern
+A JSON file containing a single pattern can be uploaded to the ***Upload a pattern*** input. If a file containing multiple patterns is uploaded, it will be rejected.
+
+### Uploading images
+Image files are treated as entity textures. Here are the steps on how to properly upload these files.
+
+1. Add a plane to a scene. Planes are the only entities that can be textured. 
+2. Click the edit entity toggle and locate the input for textures labeled "Upload your textures here." Any number of files can be uploaded here. Images uploaded will be available as textures in the dropdown labeled "Texture".
+3. Select the desired texture from the "Texture" dropdown. Selecting a texture will automatically resize the plane to the images aspect ratio. To retain the original image colors, set the plane color to be white.
+
+### Adding Entities
+![plot](../Images/custom.PNG)
+To add an entity, make sure the slider at the top left of the webpage is set to ***Edit Pattern*** then move the slider below it to the ***Add Entity***.  
+
+Then, select the type of entity you would like to add using the ***Type of entity*** dropdown and hit the ***Add to Pattern*** button.
+
+Entities will spawn at a random position within the editor camera field of view with a random color.
+
+***Entities may appear skewed in the editor but this affect is corrected on the headset. Do not stack entities, it will result in [z-fighting].(https://en.wikipedia.org/wiki/Z-fighting)***
+
+#### Types of Entities
+- Circle
+- Plane
+- Triangle
+- Gradient
+- Checkerboard
+- Grille
+
+### Editing Entities
+![plot](../Images/editorExample.PNG)
+**In order to access the editor one or more entities must be added to the pattern**. The editing bar can be hidden by pressing the ***Hide Settings*** button.
+
+Once entities have been added to the pattern, change the slider to ***Edit Entity***.
+
+To change the entity being edited, either click on the entity or select the desired entity from the dropdown labeled ***Current Entity***.
+Entity ID's are automatically generated with the format **\<name of entity\>\<number of entities of this type previously created\>**.  
+
+Examples: circle0, checkerboard4, plane20.
+
+The current entity can be removed by hitting the ***Remove from Pattern***. The entire pattern can be reset by hitting the ***Reset Pattern*** button.
+
+### Saving the Pattern
+To save the current pattern, press the ***Save Pattern*** button located at the bottom of the editor tab. The pattern is saved as an editable JSON file. Uploaded textures are preserved without image compression.
+
+### Background Color
+To change the background color, select a new color or enter the hexadecimal code of the desired color.
+
+### Universal Entity Settings
+#### Position: (x deg, y world units)
+To edit the position, locate the position text boxes under **Universal Entity Settings**. The left box refers to the x position and the y position.  
+
+The position of an entity refers to where its center point is located. The editor interfaces the three axis in different manners. 
+Positional data is calculated based on a cylinder that encompasses the camera. The radius of this cylinder cannot be changed, however the cylinder has an infinite height. The x and z axes are responsible for horizontal positioning. The y axis controls the vertical position. 
+
+![plot](../Images/cylinderRadius.PNG)
+
+- x-axis: 
+   - This axis is in terms of **degrees** where 1 degree references 1 degree of clockwise rotation away from the fixed camera center on the cylinder.
+- y-axis: 
+   - This axis is in terms of **world units** where 1 world unit is equal to 1 meter in 3D space. 
+- z-axis: 
+   - **The z-axis is NOT editable by users.** The location on the z-axis is automatically calculated based on the x-axis angle.
+
+The reason that the radius of the cylinder is not editable is due to the fact that all entities are 2-dimensional. Changing their depth would essentially have the same effect as making entities smaller or larger.
+
+#### Rotation: θ deg
+To edit the rotation, locate the text box labeled ***Rotation*** under **Universal Entity Settings**.
+
+For this program, the rotation of an entity refers to rotation around the **z-axis only**. The axis of rotation is located at the center point of entity. The unit for rotation is **degrees** where 1 degree refers to one degree of rotation about the axis of rotation.
+
+#### Color: #HEXCODE
+To edit the color, locate the color selector labeled ***Color*** under **Universal Entity Settings**.
+
+Select a color using the color slider or input the desired color in hexadecimal format.
+
+***For checkerboards and grilles, the alternate color will always be black***
+
+### Entity Specific Settings
+#### Circle 
+- Radius (m): 
+   - The unit for radius is world units where 1 world unit is equal to 1 meter in 3D space.
+- Border Size: 
+   - The unit for border size is world units where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius of the circle, meaning the entity is entirely filled in.
+
+#### Plane
+- Texture: 
+   - There are some textures built into the site. [They can be found here.](./textures) Textures can also be uploaded as JPGS or PNGS and added to the list of available textures in the pattern. 
+   - Applying a texture will automatically scale the plane to fit the aspect ratio.
+- Height (m): 
+   - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
+- Width (m): 
+   - The unit for width is world units where 1 world unit is equal to 1 meter in 3D space.
+- Border Size: 
+   - The unit for border size is world units where 1 world unit is equal to 1 meter in 3D space. By default, the border size is set to be equal to the radius to the smallest dimension present of the plane, meaning the entity is entirely filled in.
+
+#### Triangle
+![plot](../Images/triangle.PNG)
+- Vertex A (x m,y m):
+   - Position of vertex A in relation to the center point of the entity. The coordinates are in world units where 1 world unit is equal to 1 meter in 3D space.
+- Vertex B (x m,y m):
+   - Position of vertex B in relation to the center point of the entity. The coordinates are in world units where 1 world unit is equal to 1 meter in 3D space.
+- Vertex C (x m,y m):
+   - Position of vertex C in relation to the center point of the entity. The coordinates are in world units where 1 world unit is equal to 1 meter in 3D space.
+
+#### Gradient
+- Individual Bar Height (m): 
+   - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
+- Indivdual Bar Width (m): 
+   - The unit for width is world units where 1 world unit is equal to 1 meter in 3D space.
+- Number of Bars:
+   - The number of bars in the gradient, the default is 32.
+   - The color is divided by the number of bars to determine the color of each bar.
+
+#### Checkerboard
+- Tile size (m): 
+   - The unit for width and height of tiles is world units where 1 world unit is equal to 1 meter in 3D space.
+- Number of Rows: 
+   - The number of rows in the checkerboard, the default is 16.
+- Number of Columns:
+   - The number of columns in the checkerboard, the default is 16.
+
+#### Grille
+- Individual Bar Height (m): 
+   - The unit for height is world units where 1 world unit is equal to 1 meter in 3D space.
+- Indivdual Bar Width (m): 
+   - The unit for width is world units where 1 world unit is equal to 1 meter in 3D space.
+- Number of Bars:
+   - The number of bars in the grille, the default is 32.
+
+### Other Notes
+If you would like to inspect the HTML or JavaScript data of the selected entity:  
+- Open the inspector with Ctrl + Shift + i
+- Enter "selectedEntity" into the command prompt, this will bring up all associated HTML code
+- Enter "selectedEntity.getAttribute("\<desired component\>") to see the associated JavaScript data for the desired component
+   - Ex: selectedEntity.getAttribute("position") to view position or selectedEntity.getAttribute("material") to view texture and color
+- Enter "selectedEntity.setAttribute("\<desired component\>",\<desired value\>) to set the associated JavaScript data for the desired component
+   - Ex: selectedEntity.setAttribute("position",{x: 0, y: 0, z: -125}) to set position to 0,0 on the cylindrical plane
+   - Ex: selectedEntity.setAttribute("material",{color: "#0000FF", shader: "flat", src: ""}) to set the color to red and remove the texture, ***make sure to include shader: "flat" to remove unnecessary lighting effects*** 
+   
+   
+## JSON File Format
+{  
+&nbsp;&nbsp;"scenes":   
+&nbsp;&nbsp;&nbsp;&nbsp;{ map of scenes },  
+&nbsp;&nbsp;   "textures": {  
+&nbsp;&nbsp;&nbsp;&nbsp;      "uploadedTextureFormats":  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ map of image sizes for uploaded textures },  
+&nbsp;&nbsp;&nbsp;&nbsp;      "textureValues":  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ list of textures associated with patterns being saved],  
+&nbsp;&nbsp;   }  
+&nbsp;&nbsp;   "date": "datetime of save"  
+}  
+   

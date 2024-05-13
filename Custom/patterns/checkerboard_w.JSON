@@ -25,13 +25,25 @@
 				},
 				"material": {
 					"shader": "flat",
-					"color": "#ffffff",
-					"src": ""
+					"color": "#ffffff"
 				},
 				"rotation": {
 					"x": 0,
 					"y": 0,
 					"z": 0
+				},
+				"movement":{
+					"startPoints":[],
+					"endPoints":[],
+					"initialVelocities":[],
+					"accelerations":[],
+					"types":[],
+					"origin":{"x":0,"y":0,"z":-250},
+					"rotationOrigin":{"x":0,"y":0,"z":0},
+					"status":-1,
+					"index":0,
+					"currentVelocity":0,
+					"timeElapsed":0
 				}
 			}
 		}

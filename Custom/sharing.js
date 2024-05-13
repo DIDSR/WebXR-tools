@@ -27,7 +27,6 @@ async function handleImport(){
                     window.history.pushState('object', document.title, newURL);
                 }
                 
-                console.log(url.split("?")[1])
                 alert('Success')
                 return true;
             } else {
@@ -43,12 +42,12 @@ async function handleImport(){
                     return res;
                 })
                 if(res2){
-                    if(url.includes('pastebin')){
+                    if(url.includes('https://didsr.pythonanywhere.com/webxrtools/get?id=')){
                         if(!window.location.href.includes('?')){
-                            let newURL = window.location.href + "?id=" +url.split("https://pastebin.run/")[1].split(".txt")[0]
+                            let newURL = window.location.href + "?id=" +url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]
                             window.history.pushState('object', document.title, newURL);
                         } else {
-                            let newURL = window.location.href + "," +url.split("https://pastebin.run/")[1].split(".txt")[0]
+                            let newURL = window.location.href + "," +url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]
                             window.history.pushState('object', document.title, newURL);
                         }
                     } else {
@@ -64,7 +63,7 @@ async function handleImport(){
                     alert('Success')
                     return true;
                 }
-                console.log('Handling failed')
+                alert.log('Handling failed')
                 return false;
             } else {
                 alert('Invalid link');
@@ -82,8 +81,7 @@ async function localLinkImport(url){
     ids = url.split('?id=')[1].split(',');
     let i = 0;
     while(i < ids.length){
-        console.log(ids[i])
-        var res = pastebinFetch("https://pastebin.run/"+ids[i]+".txt").then((result) => {
+        var res = pastebinFetch("https://didsr.pythonanywhere.com/webxrtools/get?id="+ids[i]).then((result) => {
             return result
         });
         if(!res){
@@ -102,14 +100,9 @@ async function validateLink(url){
             return null
             
         } else {
-            console.log(url)
            return res.json()
         }
     }).catch((error) => alert('Failed to fetch from: '+url+' with error '+error));
-    if(fileContent == null || !fileContent.hasOwnProperty('filename') || !fileContent.hasOwnProperty('date') || !fileContent.hasOwnProperty('scenes') || !fileContent.hasOwnProperty('textures')){
-        return false;
-    }
-    return true;
+    return validateJSON(fileContent)
 
 }
-

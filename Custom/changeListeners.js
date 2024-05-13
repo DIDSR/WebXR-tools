@@ -31,6 +31,51 @@ $("#z").change(function() {
     editEntity();
   });
 
+/* If the textbox for endX value is changed */
+$("#startX").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endY value is changed */
+$("#startY").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endZ value is changed */
+$("#startZ").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endX value is changed */
+$("#endX").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endY value is changed */
+$("#endY").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endZ value is changed */
+$("#endZ").change(function() {
+    editEntity();
+  });
+
+  /* If the textbox for endX value is changed */
+$("#speedIn").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endY value is changed */
+$("#accelerationIn").change(function() {
+    editEntity();
+  });
+
+/* If the textbox for endZ value is changed */
+$("#movementTypeIn").change(function() {
+    editEntity();
+  });
+
 /* If the textbox for color value is changed */
 $('#color').minicolors({
     control: 'hue',
@@ -52,7 +97,7 @@ $('#color2').minicolors({
     },
 });
 
-/* If the textbox for x value is changed */
+/* If the textbox for texture value is changed */
 $("#texture").change(function() {
     if(texture.value == "none"){
         selectedEntity.setAttribute("material",{color: selectedEntity.getAttribute("material").color, shader: "flat", src: ""});
@@ -81,7 +126,10 @@ $("#texture").change(function() {
         height.value = selectedEntity.getAttribute("geometry").height;
         fill.value = selectedEntity.getAttribute("fill").val;
         fillIn.style.display = "none";
+        updateJSON();
     }
+    
+
   });
   
 
@@ -218,6 +266,11 @@ $("#vax").change(function() {
     editEntity();
   });
 
+  /* If the textbox for vax value is changed */
+$("#size").change(function() {
+    editEntity();
+  });
+
 /* If the textbox for vay value is changed */
 $("#vay").change(function() {
     editEntity();
@@ -311,66 +364,9 @@ $("#ringPitchIn").change(function() {
     editEntity();
 });
 
-/* sends entity back or forward one layer */
-/*function sendBack(isback){
-    let tmp = null;
-    let selected = els.indexOf(selectedEntity); /* finds layer number of current entity */
-    /* checks if back or forward */
-    /*if(isback){*/ /* if back */
-        /*if (selected != 0) {*/ /* if it is not on layer 0 */
-            /* swap z values */
-            /*tmp = els[selected].getAttribute("position").z;
-            els[selected].getAttribute("position").z = els[selected-1].getAttribute("position").z;
-            els[selected-1].getAttribute("position").z = tmp;*/
-
-            /* swap position in el arr (this preserves the layering order) */    
-            /*tmp = els[selected];
-            els[selected] = els[selected-1];
-            els[selected-1] = tmp;
-        }*/
-    /*} else {*/ /* if forward */
-        /*if (selected != els.length-1) {*/ /* if not the last layer */
-            /* swap z values */
-            /*tmp = els[selected].getAttribute("position").z;
-            els[selected].getAttribute("position").z = els[selected+1].getAttribute("position").z;
-            els[selected+1].getAttribute("position").z = tmp;*/
-
-            /* swap position in el arr (this preserves the layering order) */
-            /*tmp = els[selected];
-            els[selected] = els[selected+1];
-            els[selected+1] = tmp;
-        }
-    }
-}*/
-
-/* Raycasting with orthographic camera */
-/*var raycaster = new THREE.Raycaster();
-raycaster.layers.set(0);
-window.addEventListener("pointerup", function(e) {
-    var screenPos = new THREE.Vector2();
-    
-    screenPos.x = (e.clientX / window.innerWidth) * 2 - 1;
-    screenPos.y = - (e.clientY / window.innerHeight) * 2 + 1;
-    
-    raycaster.setFromCamera(screenPos, scene.camera);
-
-    var rays = raycaster.intersectObjects(pool, true);
-    let i = rays.length;
-    if(i > 0){
-        currMin = rays[0].distance;
-        selected = rays[0].object.el;
-        while (i > 0) {
-            i--;
-            if(rays[i].distance < currMin){
-                currMin = rays[i].distance;
-                selected = rays[i].object.el;
-            }
-        }
-        selected = document.getElementById(selected.id.split("-")[0]);
-        console.log(selected);
-        selectNew(selected);
-    }
-});*/
+$("#text").change(function() {
+    editEntity();
+});
 
 
 finished = false
@@ -397,6 +393,10 @@ scene_display_input.addEventListener("change", function() {
 
             reader.onload = function() {
                 fileContent = JSON.parse(reader.result);
+                if(!validateJSON(fileContent)){
+                    alert('Invalid package');
+                    return
+                }
                 names[fileName] = ""
                 for (const [name, value] of Object.entries(fileContent['scenes'])) {
                     const re = /^[a-zA-Z0-9-_ ]+( \([0-9]+\))?$/
@@ -416,13 +416,6 @@ scene_display_input.addEventListener("change", function() {
                 packageSelect.options.add(new Option(fileName,fileName))
                 scenes[fileName] = fileContent['scenes']
                 names[fileName] = {}
-                /*Object.keys(fileContent['scenes']).forEach( currName => {
-                    if(names[fileName] == null){
-                        names[fileName][currName] = names[fileName][currName] + 1
-                    } else {
-                        names[fileName][currName] = 1
-                    }
-                });*/
                 textures = fileContent['textures']['textureValues']
                 uploadedTextureFormats = fileContent['textures']['uploadedTextureFormats']
                 cb();
@@ -458,7 +451,6 @@ scene_display_input.addEventListener("change", function() {
                 return false;
             }
             reader.readAsText(itm);
-            console.log(fileName)
             
             
             // call cb when finished
@@ -472,8 +464,7 @@ scene_display_input.addEventListener("change", function() {
     })
     // when it's done....
     myLoop.then(()=>{
-        //patternList.innerHTML = ''
-        console.log('then');
+
         packages[fileName] = ''
         let arr = Object.keys(scenes)
         let len = arr.length
@@ -519,26 +510,7 @@ scene_display_input.addEventListener("change", function() {
         
         packageSelect.value = fileName
         changePackage()
-        /*i = 0;
-        while(i < len){
-            var toggle_button = '<p><input type="checkbox" id="'+arr[i]+'" name="'+arr[i]+'" onclick="handlePatternSelect(this)"'
-            let res = Array.from(patternDisplay.children).reduce(function(acc, x) {
-                acc = acc || x.text == arr[i]
-                return acc;
-              }, false);
-            if(res == true){
-                toggle_button += 'checked/>'
-            
-            } else {
-                toggle_button += '/>'
-            }
-            toggle_button += '<label for="'+arr[i]+'">'+arr[i]+'</label></p>';
-            $('#patternList').append(toggle_button)
-            //pattern.options.add(new Option(arr[i], arr[i]))
-            i++
-        }*/
-
-    
+        
     });
 
 /**
@@ -567,7 +539,7 @@ function slowLoop(items, loopBody) {
     
 });
 
-keysPressed = {ctrl: false, x: false, c: false, v: false, i: false}
+keysPressed = {ctrl: false, x: false, c: false, v: false, i: false, m: false, r: false}
 
 /* listens for key presses to change pattern */
 document.addEventListener('keyup', (e) => {
@@ -605,6 +577,10 @@ document.addEventListener('keyup', (e) => {
         keysPressed["v"] = false;
     } else if(e.code === "KeyI"){
         keysPressed["i"] = false;
+    } else if(e.code === "KeyM"){
+        keysPressed["m"] = false;
+    }  else if(e.code === "KeyR"){
+        keysPressed["r"] = false;
     }
   });
 
@@ -649,5 +625,60 @@ document.addEventListener('keydown', (e) => {
             // paste
             document.querySelector("#debug").style.display == 'block' ? document.querySelector("#debug").style.display = 'none' : document.querySelector("#debug").style.display = 'block'
         }
+    } else if(e.code === "KeyM"){
+        keysPressed['m'] = true;
+        let i = 0;
+        while(i < entityCanvas.children.length){
+            mov = entityCanvas.children[i].getAttribute('mov')
+            if(mov.status != 0){
+                break;
+            }
+            i++;
+        }
+        if(i != entityCanvas.children.length){
+            stopAllMovement()
+        } else {
+            let i = 0;
+            sum = 0;
+            while(i < entityCanvas.children.length){
+                if((entityCanvas.children[i].getAttribute('position').x == entityCanvas.children[i].getAttribute('mov').startPoint.x && entityCanvas.children[i].getAttribute('position').y == entityCanvas.children[i].getAttribute('mov').startPoint.y && entityCanvas.children[i].getAttribute('position').z == entityCanvas.children[i].getAttribute('mov').startPoint.z) && (entityCanvas.children[i].getAttribute('rotation').x == entityCanvas.children[i].getAttribute('mov').startRotation.x && entityCanvas.children[i].getAttribute('rotation').y == entityCanvas.children[i].getAttribute('mov').startRotation.y && entityCanvas.children[i].getAttribute('rotation').z == entityCanvas.children[i].getAttribute('mov').startRotation.z)){
+                    sum++;
+                }
+                i++;
+            }
+            if(sum != i){
+                let i = 0;
+                while(i < entityCanvas.children.length){
+                    mov = entityCanvas.children[i].getAttribute('mov')
+                    entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                    entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                    i++;
+                }
+            } else {
+                startAllMovement()
+            }
+        }
+    } else if(movementKeyBinds[e.key]) {
+        if(document.activeElement == keyBind){
+            return
+        }
+        for(const i of movementKeyBinds[e.key]){
+            if(entityCanvas.children[i].getAttribute('mov').status != 0){
+                stopMovement(entityCanvas.children[i])
+            } else {
+                if((entityCanvas.children[i].getAttribute('position').x == entityCanvas.children[i].getAttribute('mov').startPoint.x && entityCanvas.children[i].getAttribute('position').y == entityCanvas.children[i].getAttribute('mov').startPoint.y && entityCanvas.children[i].getAttribute('position').z == entityCanvas.children[i].getAttribute('mov').startPoint.z) && (entityCanvas.children[i].getAttribute('rotation').x == entityCanvas.children[i].getAttribute('mov').startRotation.x && entityCanvas.children[i].getAttribute('rotation').y == entityCanvas.children[i].getAttribute('mov').startRotation.y && entityCanvas.children[i].getAttribute('rotation').z == entityCanvas.children[i].getAttribute('mov').startRotation.z)){
+                    toggleMovement(i)
+                } else {
+                    mov = entityCanvas.children[i].getAttribute('mov')
+                    entityCanvas.children[i].setAttribute('position',mov.startPoint)
+                    entityCanvas.children[i].setAttribute('rotation',mov.startRotation)
+                }
+                
+            }
+        }
     }
+
+
+
   });  
+  
