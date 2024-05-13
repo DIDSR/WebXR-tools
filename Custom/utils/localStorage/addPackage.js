@@ -144,9 +144,9 @@ async function changeUrl(){
     // get the desired package from localStorage
     let key = Object.keys(localArr[recentPackages.selectedIndex])[0]
     
+
     if(localArr[recentPackages.selectedIndex][key][2] < version){
-        alert('Package is out of date. You will need to remake it.')
-        return;
+        alert('Package is out of date. You might need to remake it.')
     }
 
     // prompt user for a name for the package and validate the input

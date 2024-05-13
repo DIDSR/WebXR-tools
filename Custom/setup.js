@@ -231,6 +231,8 @@ const stopAllButton = document.getElementById('stopAllButton')
 const consoleButton = document.getElementById('consoleButton')
 const debug = document.getElementById('debug')
 
+const docsButton = document.getElementById('docsButton');
+
 
 /* Local Variables */
 var el = null; /* recently created entity */
@@ -269,3 +271,5 @@ const names = {default: {}} // list of packages and the names and count of names
 var colorChange = true;
 
 const version = 1.0;
+
+docsButton.innerHTML = "V"+version+' <i class="fa-solid fa-circle-info"></i>'

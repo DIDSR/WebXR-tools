@@ -136,8 +136,7 @@ async function pastebinFetch(url,onload){
     
     let currVer = fileContent['version'] ? fileContent['version'] : 1.0
     if(currVer < version){
-        alert('Package is out of date. You will need to remake it.')
-        return false;
+        alert('Package is out of date. You might need to remake it.')
     }
     
     // Begin name validation
