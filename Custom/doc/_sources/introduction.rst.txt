@@ -1,10 +1,7 @@
 Introduction
 ================
 
-`Access to Pattern Creation Tool <https://didsr.github.io/WebXR-tools/Custom/>`_
------------------------------------------------------------------------------------------------
-
-`View the source code <https://github.com/DIDSR/WebXR-tools/tree/main/Custom>`_
+`Access to Pattern Creation Tool <https://brendanc490.github.io/WebVR-Test-Patterns/Custom/>`_
 -----------------------------------------------------------------------------------------------
 
 Features
@@ -29,6 +26,11 @@ Features
    - Ring_w2: A bullseye with a medium pitch
    - Ring_w5: A bullseye with a low pitch
 
+Controls
+------------
+
+.. image:: ../Images/controllerFigure.PNG
+        :width: 600
 
 Demo
 ------------
@@ -37,6 +39,8 @@ Demo
 
  
 
-           <video controls src="./_static/demoVid.mp4" width="620" height="620">
+           <video controls src="_static/demoVid.webm" width="620" height="620">
 
-           </video>
+           </video>  
+
+

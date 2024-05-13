@@ -8,15 +8,15 @@ Welcome to Pattern Generation Tool's documentation!
 The Pattern Generation Tool provides a user interface for creating, editing, and displaying `WebXR <https://immersiveweb.dev/>`_ scenes. Scenes consist of 2 and 3 dimensional entities taken from `A-Frame <https://aframe.io/docs/1.4.0/core/entity.html>`_. These entities can be manipulated in a variety of different ways to create flexible patterns. Scenes are grouped together in packages that can be downloaded and shared.
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 6
    :caption: Contents:
 
    introduction
    packages
    patterns
    entities
+   animation
    extra
-   contributing
 
 
 
