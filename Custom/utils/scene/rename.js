@@ -27,13 +27,22 @@ function renamePattern(){
     oldName = patternList.children[parseInt(patternList.getAttribute('selectedIndex'))].id
     currScene = scenes[packageSelect.value][oldName]
     currName = ''
-    if(Object.keys(names).indexOf(patternName) == -1){
+    if(!names[packageSelect.value][patternName]){
         names[patternName] = 1
         currName = patternName
     } else {
-        names[patternName] = names[patternName] + 1
-        currName = patternName+''+names[patternName]
+        currName = patternName+''+names[packageSelect.value][patternName]
+        names[packageSelect.value][patternName] = names[packageSelect.value][patternName] + 1
+        
     }
+
+    if(names[packageSelect.value][oldName] == 1){
+        delete names[packageSelect.value][oldName]
+    } else if(oldName.split('(').length > 1 && 
+        Number(oldName.split('(')[1].split(')')[0]) == names[packageSelect.value][oldName.split(' (')[0]]-1){
+            names[packageSelect.value][oldName.split(' (')[0]] = names[packageSelect.value][oldName.split(' (')[0]]-1;
+        }
+
     scenes[packageSelect.value][currName] = currScene
     delete scenes[packageSelect.value][oldName]
 

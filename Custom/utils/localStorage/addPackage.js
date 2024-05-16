@@ -1,7 +1,7 @@
 /* Adds packages to local storage.
    Returns true on success and throws an error on failure.
  */
-   function manageLocalStorage(key, value){
+   function manageLocalStorage(key, value, ver){
 
     let textures = {}
 
@@ -28,7 +28,12 @@
     // compress the package content
     value = LZString.compressToBase64(JSON.stringify(value))
 
-    let arr = [value,textures,version]
+    let arr;
+    if(ver){
+        arr = [value, textures, ver]
+    } else {
+        arr = [value,textures,version]
+    }
 
     // get the contents of localStorage
     let localScenes = JSON.parse(localStorage.getItem('packages'))
@@ -144,8 +149,9 @@ async function changeUrl(){
     // get the desired package from localStorage
     let key = Object.keys(localArr[recentPackages.selectedIndex])[0]
     
+    let currVer = localArr[recentPackages.selectedIndex][key].length < 3 ? version : localArr[recentPackages.selectedIndex][key][2];
 
-    if(localArr[recentPackages.selectedIndex][key][2] < version){
+    if(currVer < version){
         alert('Package is out of date. You might need to remake it.')
     }
 
@@ -223,6 +229,14 @@ async function changeUrl(){
             window.history.pushState('object', document.title, newURL);
         }
     }
+
+    names[packageSelect.value] = {}
+    Object.keys(scenes[packageSelect.value]).forEach(currName =>{
+        if(currName.split('(').length > 1){
+            currName = currName.split(' (')[0]
+        } 
+        names[packageSelect.value][currName] = names[packageSelect.value][currName] ? names[packageSelect.value][currName] + 1 : 1;
+    });
 
     changePackage(); // invoke the function to change packages to the selected option
 }

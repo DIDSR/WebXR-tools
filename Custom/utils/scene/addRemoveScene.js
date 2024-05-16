@@ -24,7 +24,7 @@ function addPattern(){
     }
 
     currName = ''
-    if(Object.keys(names[packageSelect.value]).indexOf(patternName) == -1){
+    if(!names[packageSelect.value][patternName]){
         names[packageSelect.value][patternName] = 1
         currName = patternName
     } else {
@@ -75,13 +75,31 @@ function removePattern(){
         i++;
     }
     children = []
+    let childrenNames = []
     revertChanges()
     indices.forEach(ind => {
         delete scenes[packageSelect.value][patternList.children[ind].id]
+        childrenNames.push(patternList.children[ind].id)
         children.push(patternList.children[ind])
     })
+
+    childrenNames.sort((a,b) => { a.localeCompare(b) }).reverse()
+
+    console.log(childrenNames)
+    childrenNames.forEach((name) => {
+        if(name.split('(').length > 1 && 
+            Number(name.split('(')[1].split(')')[0]) == names[packageSelect.value][name.split(' (')[0]]-1){
+                names[packageSelect.value][name.split(' (')[0]] = names[packageSelect.value][name.split(' (')[0]]-1;
+        } else if(names[packageSelect.value][name] == 1){
+            delete names[packageSelect.value][name]
+        } 
+    })
+
+    
+
     children.forEach(child =>{
         patternList.removeChild(child)
     })
     patternList.setAttribute('selectedIndex',null);
+    
 }

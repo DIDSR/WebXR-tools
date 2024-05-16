@@ -134,7 +134,7 @@ async function pastebinFetch(url,onload){
         return false;
     }
     
-    let currVer = fileContent['version'] ? fileContent['version'] : 1.0
+    let currVer = !Number.isNaN(fileContent['version']) ? fileContent['version'] : 1.0
     if(currVer < version){
         alert('Package is out of date. You might need to remake it.')
     }
@@ -217,14 +217,14 @@ async function pastebinFetch(url,onload){
     // handle local storage updates
     if(url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=").length > 1){
         // if link came from pastebin, then only save pastebin id
-        let out = manageLocalStorage(fileContent['filename'] + " ("+url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]+")", fileContent['scenes'])
+        let out = manageLocalStorage(fileContent['filename'] + " ("+url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]+")", fileContent['scenes'], currVer)
         if(out == false){
             return false;
         }
         packages[fileContent['filename']] = url.split("https://didsr.pythonanywhere.com/webxrtools/get?id=")[1]// save id in packages
     } else {
         // if link is not from pastebin, save entire link address
-        let out = manageLocalStorage(fileContent['filename'] + " ("+encodeURIComponent(decodeURIComponent(url))+")", fileContent['scenes'])
+        let out = manageLocalStorage(fileContent['filename'] + " ("+encodeURIComponent(decodeURIComponent(url))+")", fileContent['scenes'], currVer)
         if(out == false){
             return false;
         }
@@ -277,6 +277,14 @@ async function pastebinFetch(url,onload){
     packageSelect.options.add(new Option(fileContent['filename'],fileContent['filename']))
     packageSelect.value = fileContent['filename']
     
+    names[packageSelect.value] = {}
+    Object.keys(scenes[packageSelect.value]).forEach(currName =>{
+        if(currName.split('(').length > 1){
+            currName = currName.split(' (')[0]
+        } 
+        names[packageSelect.value][currName] = names[packageSelect.value][currName] ? names[packageSelect.value][currName] + 1 : 1;
+    });
+
     changePackage() // invokes the function change packages to the uploaded one
     return true; // returns success
 }
