@@ -27,6 +27,9 @@ function renamePackage(){
     
     scenes[packageName] = currPackage
     delete scenes[packageSelect.value]
+    
+    names[packageName] = names[oldName];
+    delete names[oldName]
     packageSelect.options[packageSelect.selectedIndex].value = packageName
     packageSelect.options[packageSelect.selectedIndex].text = packageName
 
