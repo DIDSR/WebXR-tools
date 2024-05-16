@@ -135,6 +135,7 @@ async function pastebinFetch(url,onload){
     }
     
     let currVer = !Number.isNaN(fileContent['version']) ? fileContent['version'] : 1.0
+
     if(currVer < version){
         alert('Package is out of date. You might need to remake it.')
     }
@@ -284,7 +285,6 @@ async function pastebinFetch(url,onload){
         } 
         names[packageSelect.value][currName] = names[packageSelect.value][currName] ? names[packageSelect.value][currName] + 1 : 1;
     });
-
     changePackage() // invokes the function change packages to the uploaded one
     return true; // returns success
 }

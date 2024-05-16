@@ -42,7 +42,6 @@ function renamePattern(){
         Number(oldName.split('(')[1].split(')')[0]) == names[packageSelect.value][oldName.split(' (')[0]]-1){
             names[packageSelect.value][oldName.split(' (')[0]] = names[packageSelect.value][oldName.split(' (')[0]]-1;
         }
-
     scenes[packageSelect.value][currName] = currScene
     delete scenes[packageSelect.value][oldName]
 
