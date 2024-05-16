@@ -238,9 +238,6 @@ async function changeUrl(){
         names[packageSelect.value][currName] = names[packageSelect.value][currName] ? names[packageSelect.value][currName] + 1 : 1;
     });
 
-    changePackage(); // invoke the function to change packages to the selected option
-}
-
 // condensed function to get size of a string
 function ByteSize(str){
     return new Blob([str]).size

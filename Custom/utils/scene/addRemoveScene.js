@@ -95,11 +95,8 @@ function removePattern(){
         } 
     })
 
-    
-
     children.forEach(child =>{
         patternList.removeChild(child)
     })
     patternList.setAttribute('selectedIndex',null);
-    
 }
