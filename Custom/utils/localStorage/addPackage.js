@@ -237,7 +237,7 @@ async function changeUrl(){
         } 
         names[packageSelect.value][currName] = names[packageSelect.value][currName] ? names[packageSelect.value][currName] + 1 : 1;
     });
-
+}
 // condensed function to get size of a string
 function ByteSize(str){
     return new Blob([str]).size
