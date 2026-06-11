@@ -6,12 +6,12 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "doc/"
     # Create an artifact of the html output.
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v7
       with:
         name: DocumentationHTML
         path: doc/_build/html/      
